@@ -13,582 +13,499 @@ class Medication extends Contract {
     const medications =
       [
         {
-          ApplNo: '000004',
-          ProductNo: '004',
-          Form: 'SOLUTION/DROPS;OPHTHALMIC',
-          Strength: '1%',
-          ReferenceDrug: '0',
-          DrugName: 'PAREDRINE',
-          ActiveIngredient: 'HYDROXYAMPHETAMINE HYDROBROMIDE',
-          ReferenceStandard: '0',
-          Owner: 'INOVA'
+          lotNo: 1,
+          applNo: '000004',
+          productNo: '004',
+          form: 'SOLUTION/DROPS;OPHTHALMIC',
+          strength: '1%',
+          referenceDrug: '0',
+          drugName: 'PAREDRINE',
+          activeIngredient: 'HYDROXYAMPHETAMINE HYDROBROMIDE',
+          referenceStandard: '0'
+          , quantity:1000, recipient:'', owner: 'INOVA'
         },
         {
-          ApplNo: '000159',
-          ProductNo: '001',
-          Form: 'TABLET;ORAL',
-          Strength: '500MG',
-          ReferenceDrug: '0',
-          DrugName: 'SULFAPYRIDINE',
-          ActiveIngredient: 'SULFAPYRIDINE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:2,
+          applNo: '000159',
+          productNo: '001',
+          form: 'TABLET;ORAL',
+          strength: '500MG',
+          referenceDrug: '0',
+          drugName: 'SULFAPYRIDINE',
+          activeIngredient: 'SULFAPYRIDINE',
+          referenceStandard: '0'
+          , quantity:1000, recipient:'', owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '001',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '20,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'LIQUAEMIN SODIUM',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:3,
+          applNo: '000552',
+          productNo: '001',
+          form: 'INJECTABLE;INJECTION',
+          strength: '20,000 UNITS/ML',
+          referenceDrug: '0',
+          drugName: 'LIQUAEMIN SODIUM',
+          activeIngredient: 'HEPARIN SODIUM',
+          referenceStandard: '0'
+          , quantity:1000, recipient:'', owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '002',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '40,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'LIQUAEMIN SODIUM',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:4,
+          applNo: '000552',
+          productNo: '002',
+          form: 'INJECTABLE;INJECTION',
+          strength: '40,000 UNITS/ML',
+          referenceDrug: '0',
+          drugName: 'LIQUAEMIN SODIUM',
+          activeIngredient: 'HEPARIN SODIUM',
+          referenceStandard: '0'
+          , quantity:1000, recipient:'', owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '003',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '5,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'LIQUAEMIN SODIUM',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:5,
+          applNo: '000552',
+          productNo: '003',
+          form: 'INJECTABLE;INJECTION',
+          strength: '5,000 UNITS/ML',
+          referenceDrug: '0',
+          drugName: 'LIQUAEMIN SODIUM',
+          activeIngredient: 'HEPARIN SODIUM',
+          referenceStandard: '0'
+          , quantity:1000, recipient:'', owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '004',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '1,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'LIQUAEMIN SODIUM',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:6,
+          applNo: '000552',
+          productNo: '004',
+          form: 'INJECTABLE;INJECTION',
+          strength: '1,000 UNITS/ML',
+          referenceDrug: '0',
+          drugName: 'LIQUAEMIN SODIUM',
+          activeIngredient: 'HEPARIN SODIUM',
+          referenceStandard: '0'
+          , quantity:1000, recipient:'', owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '005',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '10,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'LIQUAEMIN SODIUM',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:7,
+          applNo: '000552',
+          productNo: '007',
+          form: 'INJECTABLE;INJECTION',
+          strength: '100 UNITS/ML',
+          referenceDrug: '0',
+          drugName: 'LIQUAEMIN LOCK FLUSH',
+          activeIngredient: 'HEPARIN SODIUM',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '007',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '100 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'LIQUAEMIN LOCK FLUSH',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:8,
+          applNo: '000552',
+          productNo: '008',
+          form: 'INJECTABLE;INJECTION',
+          strength: '1,000 UNITS/ML',
+          referenceDrug: '0',
+          drugName: 'HEPARIN SODIUM',
+          activeIngredient: 'HEPARIN SODIUM',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '008',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '1,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'HEPARIN SODIUM',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:9,
+          applNo: '000552',
+          productNo: '011',
+          form: 'INJECTABLE;INJECTION',
+          strength: '1,000 UNITS/ML',
+          referenceDrug: '0',
+          drugName: 'LIQUAEMIN SODIUM PRESERVATIVE FREE',
+          activeIngredient: 'HEPARIN SODIUM',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '009',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '5,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'HEPARIN SODIUM',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:10,
+          applNo: '000552',
+          productNo: '012',
+          form: 'INJECTABLE;INJECTION',
+          strength: '5,000 UNITS/ML',
+          referenceDrug: '0',
+          drugName: 'LIQUAEMIN SODIUM PRESERVATIVE FREE',
+          activeIngredient: 'HEPARIN SODIUM',
+          referenceStandard: '0',
+         quantity:1000, 
+         recipient:'', 
+         owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '010',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '10,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'HEPARIN SODIUM',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:11,
+          applNo: '000734',
+          productNo: '001',
+          form: 'INJECTABLE;INJECTION',
+          strength: 'EQ 1MG BASE/ML',
+          referenceDrug: '0',
+          drugName: 'HISTAMINE PHOSPHATE',
+          activeIngredient: 'HISTAMINE PHOSPHATE',
+          referenceStandard: '0',
+         quantity:1000, 
+         recipient:'', 
+         owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '011',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '1,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'LIQUAEMIN SODIUM PRESERVATIVE FREE',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:12,
+          applNo: '000734',
+          productNo: '002',
+          form: 'INJECTABLE;INJECTION',
+          strength: 'EQ 0.2MG BASE/ML',
+          referenceDrug: '0',
+          drugName: 'HISTAMINE PHOSPHATE',
+          activeIngredient: 'HISTAMINE PHOSPHATE',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '012',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '5,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'LIQUAEMIN SODIUM PRESERVATIVE FREE',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:13,
+          applNo: '000734',
+          productNo: '003',
+          form: 'INJECTABLE;INJECTION',
+          strength: 'EQ 0.1MG BASE/ML',
+          referenceDrug: '0',
+          drugName: 'HISTAMINE PHOSPHATE',
+          activeIngredient: 'HISTAMINE PHOSPHATE',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000552',
-          ProductNo: '013',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '10,000 UNITS/ML',
-          ReferenceDrug: '0',
-          DrugName: 'LIQUAEMIN SODIUM PRESERVATIVE FREE',
-          ActiveIngredient: 'HEPARIN SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:14,
+          applNo: '000793',
+          productNo: '002',
+          form: 'TABLET;ORAL',
+          strength: '15MG',
+          referenceDrug: '0',
+          drugName: 'BUTISOL SODIUM',
+          activeIngredient: 'BUTABARBITAL SODIUM',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000734',
-          ProductNo: '001',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: 'EQ 1MG BASE/ML',
-          ReferenceDrug: '0',
-          DrugName: 'HISTAMINE PHOSPHATE',
-          ActiveIngredient: 'HISTAMINE PHOSPHATE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:15,
+          applNo: '001104',
+          productNo: '001',
+          form: 'INJECTABLE;INJECTION',
+          strength: '5MG/ML',
+          referenceDrug: '0',
+          drugName: 'DOCA',
+          activeIngredient: 'DESOXYCORTICOSTERONE ACETATE',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000734',
-          ProductNo: '002',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: 'EQ 0.2MG BASE/ML',
-          ReferenceDrug: '0',
-          DrugName: 'HISTAMINE PHOSPHATE',
-          ActiveIngredient: 'HISTAMINE PHOSPHATE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:16,
+          applNo: '001504',
+          productNo: '001',
+          form: 'UNKNOWN',
+          strength: 'UNKNOWN',
+          referenceDrug: '0',
+          drugName: 'VERARD',
+          activeIngredient: 'VERARD',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000734',
-          ProductNo: '003',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: 'EQ 0.1MG BASE/ML',
-          ReferenceDrug: '0',
-          DrugName: 'HISTAMINE PHOSPHATE',
-          ActiveIngredient: 'HISTAMINE PHOSPHATE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:17,
+          applNo: '001546',
+          productNo: '001',
+          form: 'TABLET;ORAL',
+          strength: '125MG',
+          referenceDrug: '0',
+          drugName: 'GUANIDINE HYDROCHLORIDE',
+          activeIngredient: 'GUANIDINE HYDROCHLORIDE',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000793',
-          ProductNo: '002',
-          Form: 'TABLET;ORAL',
-          Strength: '15MG',
-          ReferenceDrug: '0',
-          DrugName: 'BUTISOL SODIUM',
-          ActiveIngredient: 'BUTABARBITAL SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:18,
+          applNo: '002139',
+          productNo: '003',
+          form: 'TABLET;ORAL',
+          strength: '5MG',
+          referenceDrug: '0',
+          drugName: 'MENADIONE',
+          activeIngredient: 'MENADIONE',
+          referenceStandard: '0'
+          , quantity:1000, recipient:'', owner: 'INOVA'
         },
         {
-          ApplNo: '000793',
-          ProductNo: '003',
-          Form: 'TABLET;ORAL',
-          Strength: '50MG',
-          ReferenceDrug: '0',
-          DrugName: 'BUTISOL SODIUM',
-          ActiveIngredient: 'BUTABARBITAL SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:19,
+          applNo: '002245',
+          productNo: '002',
+          form: 'TABLET;ORAL',
+          strength: '65MG',
+          referenceDrug: '0',
+          drugName: 'PROLOID',
+          activeIngredient: 'THYROGLOBULIN',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'',
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000793',
-          ProductNo: '004',
-          Form: 'TABLET;ORAL',
-          Strength: '30MG',
-          ReferenceDrug: '1',
-          DrugName: 'BUTISOL SODIUM',
-          ActiveIngredient: 'BUTABARBITAL SODIUM',
-          ReferenceStandard: '1'
-          , Owner: 'INOVA'
+          lotNo:20,
+          applNo: '002282',
+          productNo: '001',
+          form: 'INJECTABLE;INJECTION',
+          strength: '100MG/ML',
+          referenceDrug: '0',
+          drugName: 'INULIN AND SODIUM CHLORIDE',
+          activeIngredient: 'INULIN',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '000793',
-          ProductNo: '005',
-          Form: 'TABLET;ORAL',
-          Strength: '100MG',
-          ReferenceDrug: '0',
-          DrugName: 'BUTISOL SODIUM',
-          ActiveIngredient: 'BUTABARBITAL SODIUM',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:21,
+          applNo: '002386',
+          productNo: '002',
+          form: 'TABLET;ORAL',
+          strength: '100MG',
+          referenceDrug: '0',
+          drugName: 'AMINOPHYLLIN',
+          activeIngredient: 'AMINOPHYLLINE',
+          referenceStandard: '0', 
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '001104',
-          ProductNo: '001',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '5MG/ML',
-          ReferenceDrug: '0',
-          DrugName: 'DOCA',
-          ActiveIngredient: 'DESOXYCORTICOSTERONE ACETATE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:22,
+          applNo: '002386',
+          productNo: '003',
+          form: 'TABLET;ORAL',
+          strength: '200MG',
+          referenceDrug: '0',
+          drugName: 'AMINOPHYLLIN',
+          activeIngredient: 'AMINOPHYLLINE',
+          referenceStandard: '0', 
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '001504',
-          ProductNo: '001',
-          Form: 'UNKNOWN',
-          Strength: 'UNKNOWN',
-          ReferenceDrug: '0',
-          DrugName: 'VERARD',
-          ActiveIngredient: 'VERARD',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:23,
+          applNo: '002918',
+          productNo: '001',
+          form: 'POWDER;TOPICAL',
+          strength: '33.32%',
+          referenceDrug: '0',
+          drugName: 'BENSULFOID',
+          activeIngredient: 'SULFUR',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '001546',
-          ProductNo: '001',
-          Form: 'TABLET;ORAL',
-          Strength: '125MG',
-          ReferenceDrug: '0',
-          DrugName: 'GUANIDINE HYDROCHLORIDE',
-          ActiveIngredient: 'GUANIDINE HYDROCHLORIDE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:24,
+          applNo: '003158',
+          productNo: '001',
+          form: 'TABLET;ORAL',
+          strength: '10MG',
+          referenceDrug: '0',
+          drugName: 'ORETON METHYL',
+          activeIngredient: 'METHYLTESTOSTERONE',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '002139',
-          ProductNo: '003',
-          Form: 'TABLET;ORAL',
-          Strength: '5MG',
-          ReferenceDrug: '0',
-          DrugName: 'MENADIONE',
-          ActiveIngredient: 'MENADIONE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:25,
+          applNo: '003158',
+          productNo: '002',
+          form: 'TABLET;ORAL',
+          strength: '25MG',
+          referenceDrug: '0',
+          drugName: 'ORETON METHYL',
+          activeIngredient: 'METHYLTESTOSTERONE',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
+        },
+
+        {
+          lotNo:26,
+          applNo: '003240',
+          productNo: '004',
+          form: 'TABLET;BUCCAL, SUBLINGUAL',
+          strength: '5MG',
+          referenceDrug: '0',
+          drugName: 'METANDREN',
+          activeIngredient: 'METHYLTESTOSTERONE',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '002245',
-          ProductNo: '002',
-          Form: 'TABLET;ORAL',
-          Strength: '65MG',
-          ReferenceDrug: '0',
-          DrugName: 'PROLOID',
-          ActiveIngredient: 'THYROGLOBULIN',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:27,
+          applNo: '003240',
+          productNo: '005',
+          form: 'TABLET;BUCCAL, SUBLINGUAL',
+          strength: '10MG',
+          referenceDrug: '0',
+          drugName: 'METANDREN',
+          activeIngredient: 'METHYLTESTOSTERONE',
+          referenceStandard: '0',
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '002245',
-          ProductNo: '004',
-          Form: 'TABLET;ORAL',
-          Strength: '325MG',
-          ReferenceDrug: '0',
-          DrugName: 'PROLOID',
-          ActiveIngredient: 'THYROGLOBULIN',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:28,
+          applNo: '003402',
+          productNo: '001',
+          form: 'INJECTABLE;INJECTION',
+          strength: '5PRESSOR UNITS/ML **Federal Register determination that product was not discontinued or withdrawn for safety or efficacy reasons**',
+          referenceDrug: '1',
+          drugName: 'PITRESSIN TANNATE',
+          activeIngredient: 'VASOPRESSIN TANNATE',
+          referenceStandard: '0', 
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '002245',
-          ProductNo: '005',
-          Form: 'TABLET;ORAL',
-          Strength: '32MG',
-          ReferenceDrug: '0',
-          DrugName: 'PROLOID',
-          ActiveIngredient: 'THYROGLOBULIN',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:29,
+          applNo: '003444',
+          productNo: '001',
+          form: 'CAPSULE;ORAL',
+          strength: '50,000 IU',
+          referenceDrug: '1',
+          drugName: 'DRISDOL',
+          activeIngredient: 'ERGOCALCIFEROL',
+          referenceStandard: '1', 
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '002245',
-          ProductNo: '007',
-          Form: 'TABLET;ORAL',
-          Strength: '200MG',
-          ReferenceDrug: '0',
-          DrugName: 'PROLOID',
-          ActiveIngredient: 'THYROGLOBULIN',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:30,
+          applNo: '003718',
+          productNo: '004',
+          form: 'INJECTABLE;INJECTION',
+          strength: '5MG/ML',
+          referenceDrug: '0',
+          drugName: 'SYNKAYVITE',
+          activeIngredient: 'MENADIOL SODIUM DIPHOSPHATE',
+          referenceStandard: '0', 
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '002245',
-          ProductNo: '008',
-          Form: 'TABLET;ORAL',
-          Strength: '100MG',
-          ReferenceDrug: '0',
-          DrugName: 'PROLOID',
-          ActiveIngredient: 'THYROGLOBULIN',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:31,
+          applNo: '003718',
+          productNo: '006',
+          form: 'INJECTABLE;INJECTION',
+          strength: '10MG/ML',
+          referenceDrug: '0',
+          drugName: 'SYNKAYVITE',
+          activeIngredient: 'MENADIOL SODIUM DIPHOSPHATE',
+          referenceStandard: '0', 
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
+        },
+        
+        {
+          lotNo:32,
+          applNo: '003718',
+          productNo: '010',
+          form: 'TABLET;ORAL',
+          strength: '5MG',
+          referenceDrug: '0',
+          drugName: 'SYNKAYVITE',
+          activeIngredient: 'MENADIOL SODIUM DIPHOSPHATE',
+          referenceStandard: '0', 
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '002245',
-          ProductNo: '009',
-          Form: 'TABLET;ORAL',
-          Strength: '16MG',
-          ReferenceDrug: '0',
-          DrugName: 'PROLOID',
-          ActiveIngredient: 'THYROGLOBULIN',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:33,
+          applNo: '003977',
+          productNo: '001',
+          form: 'INJECTABLE;INJECTION',
+          strength: '1MG/ML',
+          referenceDrug: '0',
+          drugName: 'THEELIN',
+          activeIngredient: 'ESTRONE',
+          referenceStandard: '0', 
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '002245',
-          ProductNo: '010',
-          Form: 'TABLET;ORAL',
-          Strength: '130MG',
-          ReferenceDrug: '0',
-          DrugName: 'PROLOID',
-          ActiveIngredient: 'THYROGLOBULIN',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:34,
+          applNo: '003977',
+          productNo: '002',
+          form: 'INJECTABLE;INJECTION',
+          strength: '2MG/ML',
+          referenceDrug: '0',
+          drugName: 'THEELIN',
+          activeIngredient: 'ESTRONE',
+          referenceStandard: '0', 
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '002282',
-          ProductNo: '001',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '100MG/ML',
-          ReferenceDrug: '0',
-          DrugName: 'INULIN AND SODIUM CHLORIDE',
-          ActiveIngredient: 'INULIN',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
+          lotNo:35,
+          applNo: '003977',
+          productNo: '003',
+          form: 'INJECTABLE;INJECTION',
+          strength: '5MG/ML',
+          referenceDrug: '0',
+          drugName: 'THEELIN',
+          activeIngredient: 'ESTRONE',
+          referenceStandard: '0', 
+          quantity:1000, 
+          recipient:'', 
+          owner: 'INOVA'
         },
         {
-          ApplNo: '002386',
-          ProductNo: '002',
-          Form: 'TABLET;ORAL',
-          Strength: '100MG',
-          ReferenceDrug: '0',
-          DrugName: 'AMINOPHYLLIN',
-          ActiveIngredient: 'AMINOPHYLLINE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '002386',
-          ProductNo: '003',
-          Form: 'TABLET;ORAL',
-          Strength: '200MG',
-          ReferenceDrug: '0',
-          DrugName: 'AMINOPHYLLIN',
-          ActiveIngredient: 'AMINOPHYLLINE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '002918',
-          ProductNo: '001',
-          Form: 'POWDER;TOPICAL',
-          Strength: '33.32%',
-          ReferenceDrug: '0',
-          DrugName: 'BENSULFOID',
-          ActiveIngredient: 'SULFUR',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003158',
-          ProductNo: '001',
-          Form: 'TABLET;ORAL',
-          Strength: '10MG',
-          ReferenceDrug: '0',
-          DrugName: 'ORETON METHYL',
-          ActiveIngredient: 'METHYLTESTOSTERONE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003158',
-          ProductNo: '002',
-          Form: 'TABLET;ORAL',
-          Strength: '25MG',
-          ReferenceDrug: '0',
-          DrugName: 'ORETON METHYL',
-          ActiveIngredient: 'METHYLTESTOSTERONE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003240',
-          ProductNo: '001',
-          Form: 'TABLET;BUCCAL, SUBLINGUAL',
-          Strength: '10MG',
-          ReferenceDrug: '0',
-          DrugName: 'METANDREN',
-          ActiveIngredient: 'METHYLTESTOSTERONE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003240',
-          ProductNo: '003',
-          Form: 'TABLET;BUCCAL, SUBLINGUAL',
-          Strength: '25MG',
-          ReferenceDrug: '0',
-          DrugName: 'METANDREN',
-          ActiveIngredient: 'METHYLTESTOSTERONE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003240',
-          ProductNo: '004',
-          Form: 'TABLET;BUCCAL, SUBLINGUAL',
-          Strength: '5MG',
-          ReferenceDrug: '0',
-          DrugName: 'METANDREN',
-          ActiveIngredient: 'METHYLTESTOSTERONE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003240',
-          ProductNo: '005',
-          Form: 'TABLET;BUCCAL, SUBLINGUAL',
-          Strength: '10MG',
-          ReferenceDrug: '0',
-          DrugName: 'METANDREN',
-          ActiveIngredient: 'METHYLTESTOSTERONE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003402',
-          ProductNo: '001',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '5PRESSOR UNITS/ML **Federal Register determination that product was not discontinued or withdrawn for safety or efficacy reasons**',
-          ReferenceDrug: '1',
-          DrugName: 'PITRESSIN TANNATE',
-          ActiveIngredient: 'VASOPRESSIN TANNATE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003444',
-          ProductNo: '001',
-          Form: 'CAPSULE;ORAL',
-          Strength: '50,000 IU',
-          ReferenceDrug: '1',
-          DrugName: 'DRISDOL',
-          ActiveIngredient: 'ERGOCALCIFEROL',
-          ReferenceStandard: '1'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003718',
-          ProductNo: '004',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '5MG/ML',
-          ReferenceDrug: '0',
-          DrugName: 'SYNKAYVITE',
-          ActiveIngredient: 'MENADIOL SODIUM DIPHOSPHATE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003718',
-          ProductNo: '006',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '10MG/ML',
-          ReferenceDrug: '0',
-          DrugName: 'SYNKAYVITE',
-          ActiveIngredient: 'MENADIOL SODIUM DIPHOSPHATE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003718',
-          ProductNo: '008',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '37.5MG/ML',
-          ReferenceDrug: '0',
-          DrugName: 'SYNKAYVITE',
-          ActiveIngredient: 'MENADIOL SODIUM DIPHOSPHATE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003718',
-          ProductNo: '010',
-          Form: 'TABLET;ORAL',
-          Strength: '5MG',
-          ReferenceDrug: '0',
-          DrugName: 'SYNKAYVITE',
-          ActiveIngredient: 'MENADIOL SODIUM DIPHOSPHATE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003977',
-          ProductNo: '001',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '1MG/ML',
-          ReferenceDrug: '0',
-          DrugName: 'THEELIN',
-          ActiveIngredient: 'ESTRONE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003977',
-          ProductNo: '002',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '2MG/ML',
-          ReferenceDrug: '0',
-          DrugName: 'THEELIN',
-          ActiveIngredient: 'ESTRONE',
-          ReferenceStandard: '0'
-          , Owner: 'INOVA'
-        },
-        {
-          ApplNo: '003977',
-          ProductNo: '003',
-          Form: 'INJECTABLE;INJECTION',
-          Strength: '5MG/ML',
-          ReferenceDrug: '0',
-          DrugName: 'THEELIN',
-          ActiveIngredient: 'ESTRONE',
-          ReferenceStandard: '0',
-          Owner: 'INOVA'
-        },
-        {
-          ApplNo: '004039',
-          ProductNo: '002',
-          Form: 'TABLET, DELAYED RELEASE;ORAL',
-          Strength: '0.1MG',
-          ReferenceDrug: '0',
-          DrugName: 'DIETHYLSTILBESTROL',
-          ActiveIngredient: 'DIETHYLSTILBESTROL',
-          ReferenceStandard: '0',
-          Owner: 'INOVA'
+          applNo: '004039',
+          productNo: '002',
+          form: 'TABLET, DELAYED RELEASE;ORAL',
+          strength: '0.1MG',
+          referenceDrug: '0',
+          drugName: 'DIETHYLSTILBESTROL',
+          activeIngredient: 'DIETHYLSTILBESTROL',
+          referenceStandard: '0'
+          , quantity:1000, recipient:'', owner: 'INOVA'
         }
       ];
 
     for (let i = 0; i < medications.length; i++) {
       medications[i].docType = 'medication';
-      await ctx.stub.putState('MED' + i, Buffer.from(JSON.stringify(medications[i])));
+      await ctx.stub.putState('MED-' + Date.now()+""+i, Buffer.from(JSON.stringify(medications[i])));
       console.info('Added <--> ', medications[i]);
     }
     console.info('============= END : Initialize Ledger ===========');
@@ -603,20 +520,23 @@ class Medication extends Contract {
     return medAsBytes.toString();
   }
 
-  async createMedication(ctx, medNumber, ApplNo, ProductNo, Form, Strength, ReferenceDrug, DrugName, ActiveIngredient, ReferenceStandard, Owner) {
+  async createMedication(ctx, medNumber, lotNo,applNo, productNo, form, strength, referenceDrug, drugName, activeIngredient, referenceStandard, quantity, recipient, owner) {
     console.info('============= START : Create medication ===========');
 
     const medication = {
       docType: 'medication',
-      ApplNo,
-      ProductNo,
-      Form,
-      Strength,
-      ReferenceDrug,
-      DrugName,
-      ActiveIngredient,
-      ReferenceStandard,
-      Owner
+      lotNo,
+      applNo,
+      productNo,
+      form,
+      strength,
+      referenceDrug,
+      drugName,
+      activeIngredient,
+      referenceStandard,
+      quantity,
+      recipient,
+      owner
     };
 
     await ctx.stub.putState(medNumber, Buffer.from(JSON.stringify(medication)));
@@ -624,11 +544,11 @@ class Medication extends Contract {
   }
 
   async queryAllMedications(ctx) {
-    const startKey = 'MED0';
-    const endKey = 'MED999';
+    const startKey = 'MED-0';
+    const endKey = 'MED-999999999999999999';
 
-    const iterator = await ctx.stub.getStateByRange(startKey, endKey);
-
+   // const iterator = await ctx.stub.getStateByRange(startKey, endKey);
+   const iterator = await ctx.stub.getStateByRange(startKey, endKey);
     const allResults = [];
     while (true) {
       const res = await iterator.next();
@@ -655,20 +575,55 @@ class Medication extends Contract {
     }
   }
 
-  async prescribeMedication(ctx, medNumber, newOwner) {
-    console.info('============= START : prescribeMedication ===========');
+  // Create a new medication and prescribe to the patient. Reduce quantity of the existing medication.
+  async dispenseMedication(ctx, medNumber, patient, quantity) {
+  
+    console.info('============= START : dispenseMedication ===========');
 
     const medAsBytes = await ctx.stub.getState(medNumber); // get the medication from chaincode state
     if (!medAsBytes || medAsBytes.length === 0) {
       throw new Error(`${medNumber} does not exist`);
     }
     const medication = JSON.parse(medAsBytes.toString());
-    medication.owner = newOwner;
+    medication.quantity = medication.quantity - quantity;
 
     await ctx.stub.putState(medNumber, Buffer.from(JSON.stringify(medication)));
-    console.info('============= END : prescribeMedication ===========');
+    console.info('============= : updated medication inventory ===========');
+
+    createMedication(ctx, 'MED-' + Date.now()+""+1, 
+      medication.lotNo, 
+      medication.applNo,
+      medication.productNo,
+      medication.form,
+      medication.strength,
+      medication.referenceDrug,
+      medication.drugName, 
+      medication.activeIngredient, 
+      medication.referenceStandard, 
+      quantity, 
+      patient, 
+      medication.owner
+      )
+    console.info('============= END : dispenseMedication ===========');
   }
 
+    // Create a new medication and prescribe to the patient. Reduce quantity of the existing medication.
+    async transferMedication(ctx, medNumber) {
+  
+      console.info('============= START : transferMedication ===========');
+  
+      const medAsBytes = await ctx.stub.getState(medNumber); // get the medication from chaincode state
+      if (!medAsBytes || medAsBytes.length === 0) {
+        throw new Error(`${medNumber} does not exist`);
+      }
+      const medication = JSON.parse(medAsBytes.toString());
+      medication.owner = owner
+  
+      await ctx.stub.putState(medNumber, Buffer.from(JSON.stringify(medication)));
+  
+      console.info('============= END : transferMedication ===========');
+    }
+  
 }
 
 module.exports = Medication;
