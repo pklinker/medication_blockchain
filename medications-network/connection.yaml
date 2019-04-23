@@ -2,7 +2,7 @@
 name: basic-network
 version: 1.0.0
 client:
-    organization: Org1
+    organization: Manufacturing
     connection:
         timeout:
             peer:
@@ -13,21 +13,21 @@ channels:
         orderers:
         - orderer.example.com
         peers:
-            peer0.org1.example.com: {}
+            peer0.manufacturing.bigpharma.com: {}
 organizations:
-    Org1:
-        mspid: Org1MSP
+    Manufacturing:
+        mspid: ManufacturingMSP
         peers:
-        - peer0.org1.example.com
+        - peer0.manufacturing.bigpharma.com
         certificateAuthorities:
-        - ca.example.com
+        - ca.bigpharma.com
 orderers:
     orderer.example.com:
         url: grpc://localhost:7050
 peers:
-    peer0.org1.example.com:
+    peer0.manufacturing.bigpharma.com:
         url: grpc://localhost:7051
 certificateAuthorities:
-    ca.example.com:
+    ca.bigpharma.com:
         url: http://localhost:7054
-        caName: ca.example.com
+        caName: ca.bigpharma.com
