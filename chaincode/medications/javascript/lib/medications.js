@@ -22,7 +22,7 @@ class Medication extends Contract {
           drugName: 'PAREDRINE',
           activeIngredient: 'HYDROXYAMPHETAMINE HYDROBROMIDE',
           referenceStandard: '0'
-          , quantity:1000, recipient:'', owner: 'INOVA'
+          , quantity:1000, recipient:'', owner: 'BigPharma'
         },
         {
           lotNo:2,
@@ -34,7 +34,7 @@ class Medication extends Contract {
           drugName: 'SULFAPYRIDINE',
           activeIngredient: 'SULFAPYRIDINE',
           referenceStandard: '0'
-          , quantity:1000, recipient:'', owner: 'INOVA'
+          , quantity:1000, recipient:'', owner: 'BigPharma'
         },
         {
           lotNo:3,
@@ -46,7 +46,7 @@ class Medication extends Contract {
           drugName: 'LIQUAEMIN SODIUM',
           activeIngredient: 'HEPARIN SODIUM',
           referenceStandard: '0'
-          , quantity:1000, recipient:'', owner: 'INOVA'
+          , quantity:1000, recipient:'', owner: 'BigPharma'
         },
         {
           lotNo:4,
@@ -58,7 +58,7 @@ class Medication extends Contract {
           drugName: 'LIQUAEMIN SODIUM',
           activeIngredient: 'HEPARIN SODIUM',
           referenceStandard: '0'
-          , quantity:1000, recipient:'', owner: 'INOVA'
+          , quantity:1000, recipient:'', owner: 'BigPharma'
         },
         {
           lotNo:5,
@@ -70,7 +70,7 @@ class Medication extends Contract {
           drugName: 'LIQUAEMIN SODIUM',
           activeIngredient: 'HEPARIN SODIUM',
           referenceStandard: '0'
-          , quantity:1000, recipient:'', owner: 'INOVA'
+          , quantity:1000, recipient:'', owner: 'BigPharma'
         },
         {
           lotNo:6,
@@ -82,7 +82,7 @@ class Medication extends Contract {
           drugName: 'LIQUAEMIN SODIUM',
           activeIngredient: 'HEPARIN SODIUM',
           referenceStandard: '0'
-          , quantity:1000, recipient:'', owner: 'INOVA'
+          , quantity:1000, recipient:'', owner: 'BigPharma'
         },
         {
           lotNo:7,
@@ -96,7 +96,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:8,
@@ -110,7 +110,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:9,
@@ -124,7 +124,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:10,
@@ -138,7 +138,7 @@ class Medication extends Contract {
           referenceStandard: '0',
          quantity:1000, 
          recipient:'', 
-         owner: 'INOVA'
+         owner: 'BigPharma'
         },
         {
           lotNo:11,
@@ -152,7 +152,7 @@ class Medication extends Contract {
           referenceStandard: '0',
          quantity:1000, 
          recipient:'', 
-         owner: 'INOVA'
+         owner: 'BigPharma'
         },
         {
           lotNo:12,
@@ -166,7 +166,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:13,
@@ -180,7 +180,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:14,
@@ -194,7 +194,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:15,
@@ -208,7 +208,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:16,
@@ -222,7 +222,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:17,
@@ -236,7 +236,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:18,
@@ -248,7 +248,7 @@ class Medication extends Contract {
           drugName: 'MENADIONE',
           activeIngredient: 'MENADIONE',
           referenceStandard: '0'
-          , quantity:1000, recipient:'', owner: 'INOVA'
+          , quantity:1000, recipient:'', owner: 'BigPharma'
         },
         {
           lotNo:19,
@@ -262,7 +262,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'',
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:20,
@@ -276,7 +276,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:21,
@@ -290,7 +290,7 @@ class Medication extends Contract {
           referenceStandard: '0', 
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:22,
@@ -304,7 +304,7 @@ class Medication extends Contract {
           referenceStandard: '0', 
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:23,
@@ -318,7 +318,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:24,
@@ -332,7 +332,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:25,
@@ -346,7 +346,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
 
         {
@@ -361,7 +361,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:27,
@@ -375,7 +375,7 @@ class Medication extends Contract {
           referenceStandard: '0',
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:28,
@@ -389,7 +389,7 @@ class Medication extends Contract {
           referenceStandard: '0', 
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:29,
@@ -403,7 +403,7 @@ class Medication extends Contract {
           referenceStandard: '1', 
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:30,
@@ -417,7 +417,7 @@ class Medication extends Contract {
           referenceStandard: '0', 
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:31,
@@ -431,7 +431,7 @@ class Medication extends Contract {
           referenceStandard: '0', 
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         
         {
@@ -446,7 +446,7 @@ class Medication extends Contract {
           referenceStandard: '0', 
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:33,
@@ -460,7 +460,7 @@ class Medication extends Contract {
           referenceStandard: '0', 
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:34,
@@ -474,7 +474,7 @@ class Medication extends Contract {
           referenceStandard: '0', 
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           lotNo:35,
@@ -488,7 +488,7 @@ class Medication extends Contract {
           referenceStandard: '0', 
           quantity:1000, 
           recipient:'', 
-          owner: 'INOVA'
+          owner: 'BigPharma'
         },
         {
           applNo: '004039',
@@ -499,13 +499,13 @@ class Medication extends Contract {
           drugName: 'DIETHYLSTILBESTROL',
           activeIngredient: 'DIETHYLSTILBESTROL',
           referenceStandard: '0'
-          , quantity:1000, recipient:'', owner: 'INOVA'
+          , quantity:1000, recipient:'', owner: 'BigPharma'
         }
       ];
 
     for (let i = 0; i < medications.length; i++) {
       medications[i].docType = 'medication';
-      await ctx.stub.putState('MED-' + Date.now()+""+i, Buffer.from(JSON.stringify(medications[i])));
+      await ctx.stub.putState('MED-'+i, Buffer.from(JSON.stringify(medications[i])));
       console.info('Added <--> ', medications[i]);
     }
     console.info('============= END : Initialize Ledger ===========');
@@ -520,7 +520,9 @@ class Medication extends Contract {
     return medAsBytes.toString();
   }
 
-  async createMedication(ctx, medNumber, lotNo,applNo, productNo, form, strength, referenceDrug, drugName, activeIngredient, referenceStandard, quantity, recipient, owner) {
+  async createMedication(ctx, medNumber, lotNo, applNo, productNo, form, strength, 
+    referenceDrug, drugName, activeIngredient, referenceStandard, quantity, 
+    recipient, owner) {
     console.info('============= START : Create medication ===========');
 
     const medication = {
@@ -590,25 +592,17 @@ class Medication extends Contract {
     await ctx.stub.putState(medNumber, Buffer.from(JSON.stringify(medication)));
     console.info('============= : updated medication inventory ===========');
 
-    createMedication(ctx, 'MED-' + Date.now()+""+1, 
-      medication.lotNo, 
-      medication.applNo,
-      medication.productNo,
-      medication.form,
-      medication.strength,
-      medication.referenceDrug,
-      medication.drugName, 
-      medication.activeIngredient, 
-      medication.referenceStandard, 
-      quantity, 
-      patient, 
-      medication.owner
-      )
+    // create new medication
+    const med_number = 'MED-' + Date.now();
+    medication.medNumber = med_number;
+    medication.recipient = patient;
+    medication.quantity = quantity;
+    await ctx.stub.putState(med_number, Buffer.from(JSON.stringify(medication)));
     console.info('============= END : dispenseMedication ===========');
   }
 
-    // Create a new medication and prescribe to the patient. Reduce quantity of the existing medication.
-    async transferMedication(ctx, medNumber) {
+    // Transfer the entire medication block to a new owner.
+    async transferMedicationLot(ctx, medNumber, owner) {
   
       console.info('============= START : transferMedication ===========');
   

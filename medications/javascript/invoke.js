@@ -40,7 +40,8 @@ async function main() {
 
         // Submit the specified transaction.
         //await contract.submitTransaction('prescribeMedication', 'MED100', );
-        await contract.submitTransaction('prescribeMedication', 'MED12', 'Dave');
+	//        await contract.submitTransaction('dispenseMedication', 'MED-9', 'Kylo Ren','100');
+	  await contract.submitTransaction('transferMedicationLot', 'MED-9', 'INOVA','100');
         console.log('Transaction has been submitted');
 
         // Disconnect from the gateway.
