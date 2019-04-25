@@ -1,16 +1,17 @@
 package com.mantech.hyperledger.rest;
 
 public class Medication {
-    private  String docType;
-    private  String applNo;
-    private  String productNo;
-    private  String form;
-    private  String strength;
-    private  String referenceDrug;
-    private  String drugName;
-    private  String activeIngredient;
-    private  String referenceStandard;
-    private  String owner;
+    private String docType;
+    private String applNo;
+    private String productNo;
+    private String form;
+    private String strength;
+    private String referenceDrug;
+    private String drugName;
+    private String activeIngredient;
+    private String referenceStandard;
+    private int quantity;
+    private String owner;
 
     public String getDocType() {
         return docType;
@@ -91,4 +92,9 @@ public class Medication {
     public void setOwner(String owner) {
         this.owner = owner;
     }
+
+    public int getQuantity() { return quantity; }
+
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
 }

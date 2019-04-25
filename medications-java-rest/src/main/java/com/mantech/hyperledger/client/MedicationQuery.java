@@ -23,7 +23,7 @@ public class MedicationQuery {
         log.info(admin);
 
         // register and enroll new user
-        AppUser appUser = ChannelUtil.getUser(caClient, admin, "user1");
+        AppUser appUser = ChannelUtil.getUser(caClient, admin, "sales1");
         log.info(appUser);
 
         // get HFC client instance
@@ -33,15 +33,18 @@ public class MedicationQuery {
 
         // get HFC channel using the client
         Channel channel = ChannelUtil.getChannel(client,
-                "peer0.org1.example.com",
+                "peer0.manufacturing.bigpharma.com",
                 GRCP_ROOT+":7051",
                 "orderer.example.com",
                 GRCP_ROOT+":7050",
-                "mychannel");
+                "mychannel",
+                "eventhub01",
+                GRCP_ROOT+":7053");
+
         log.info("Channel: " + channel.getName());
 
         // call query blockchain example
-        Collection<ProposalResponse> proposalResponses = ChannelUtil.queryBlockChain(client,"mychannel","medications","queryAllMedications");
+        Collection<ProposalResponse> proposalResponses = ChannelUtil.queryBlockChain(client,"mychannel","medications","queryAllMedications", null);
         if (proposalResponses == null)
         {
             log.info("No responses");

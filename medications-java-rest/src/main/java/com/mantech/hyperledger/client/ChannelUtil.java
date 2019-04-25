@@ -22,6 +22,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Properties;
 
@@ -39,7 +40,7 @@ public class ChannelUtil {
      * @throws ProposalException
      * @throws InvalidArgumentException
      */
-    public static Collection<ProposalResponse> queryBlockChain(HFClient hfClient, String channelName, String chaincodeName, String function) throws ProposalException, InvalidArgumentException {
+    public static Collection<ProposalResponse> queryBlockChain(HFClient hfClient, String channelName, String chaincodeName, String function, ArrayList<String> args) throws ProposalException, InvalidArgumentException {
         Channel channel = hfClient.getChannel(channelName);
         // create chaincode request
         QueryByChaincodeRequest qpr = hfClient.newQueryProposalRequest();
@@ -47,6 +48,9 @@ public class ChannelUtil {
         qpr.setChaincodeID(ChaincodeID.newBuilder().setName(chaincodeName).build());
         // CC function to be called
         qpr.setFcn(function);
+        if (args != null) {
+            qpr.setArgs(args);
+        }
         Collection<ProposalResponse> res = channel.queryByChaincode(qpr);
         return res;
     }
@@ -64,10 +68,18 @@ public class ChannelUtil {
      * @throws InvalidArgumentException
      * @throws TransactionException
      */
-    public static Channel getChannel(HFClient client, String peerName, String peerUrl, String ordererName, String ordererUrl, String channelName) throws InvalidArgumentException, TransactionException {
+    public static Channel getChannel(HFClient client,
+                                     String peerName,
+                                     String peerUrl,
+                                     String ordererName,
+                                     String ordererUrl,
+                                     String channelName,
+                                     String eventHubName,
+                                     String eventHubUrl) throws InvalidArgumentException, TransactionException {
         // initialize channel
         Channel channel = client.newChannel(channelName);
         channel.addPeer(client.newPeer(peerName, peerUrl));
+//        channel.addEventHub(client.newEventHub(eventHubName, eventHubUrl));
         channel.addOrderer(client.newOrderer(ordererName, ordererUrl));
         channel.initialize();
         return channel;
@@ -104,10 +116,10 @@ public class ChannelUtil {
     public static AppUser getUser(HFCAClient caClient, AppUser registrar, String userId) throws Exception {
         AppUser appUser = tryDeserialize(userId);
         if (appUser == null) {
-            RegistrationRequest rr = new RegistrationRequest(userId, "org1");
+            RegistrationRequest rr = new RegistrationRequest(userId, "");
             String enrollmentSecret = caClient.register(rr, registrar);
             Enrollment enrollment = caClient.enroll(userId, enrollmentSecret);
-            appUser = new AppUser(userId, "org1", "Org1MSP", enrollment);
+            appUser = new AppUser(userId, "", "ManufacturingMSP", enrollment);
             serialize(appUser);
         }
         return appUser;
@@ -126,7 +138,7 @@ public class ChannelUtil {
         AppUser admin = tryDeserialize("admin");
         if (admin == null) {
             Enrollment adminEnrollment = caClient.enroll("admin", "adminpw");
-            admin = new AppUser("admin", "org1", "Org1MSP", adminEnrollment);
+            admin = new AppUser("admin", "", "ManufacturingMSP", adminEnrollment);
             serialize(admin);
         }
         return admin;
