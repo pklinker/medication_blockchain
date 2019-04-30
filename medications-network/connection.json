@@ -1,7 +1,7 @@
 {
-    "name": "basic-network",
-    "version": "1.0.0",
-    "client": {
+    "name": "medications-network",
+    "version": "1.0.1",
+    "client": [ {
         "organization": "Manufacturing",
         "connection": {
             "timeout": {
@@ -12,13 +12,25 @@
             }
         }
     },
+    {
+        "organization": "Shipping",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                },
+                "orderer": "300"
+            }
+        }
+    }],
     "channels": {
         "mychannel": {
             "orderers": [
                 "orderer.example.com"
             ],
             "peers": {
-                "peer0.manufacturing.bigpharma.com": {}
+                "peer0.manufacturing.bigpharma.com": {},
+                "peer0.shipping.shipstuff.com": {}
             }
         }
     },
@@ -31,8 +43,16 @@
             "certificateAuthorities": [
                 "ca.bigpharma.com"
             ]
-        }
-    },
+        },
+        "Shipping": {
+        "mspid": "ShippingMSP",
+        "peers": [
+            "peer0.shipping.shipstuff.com"
+        ],
+        "certificateAuthorities": [
+            "ca.shipstuff.com"
+        ]}
+      },
     "orderers": {
         "orderer.example.com": {
             "url": "grpc://localhost:7050"
@@ -41,12 +61,19 @@
     "peers": {
         "peer0.manufacturing.bigpharma.com": {
             "url": "grpc://localhost:7051"
+        },
+        "peer0.shipping.shipstuff.com": {
+            "url": "grpc://localhost:8051"
         }
     },
     "certificateAuthorities": {
         "ca.bigpharma.com": {
             "url": "http://localhost:7054",
             "caName": "ca.bigpharma.com"
-        }
-    }
+        },
+         "ca.shipstuff.com": {
+            "url": "http://localhost:8054",
+            "caName": "ca.shipstuff.com"
+        } 
+    } 
 }

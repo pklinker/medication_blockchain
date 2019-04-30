@@ -28,20 +28,57 @@ Organizations:
         MSPDir: crypto-config/ordererOrganizations/example.com/msp
 
     - &Manufacturing
-        # DefaultOrg defines the organization which is used in the sampleconfig
-        # of the fabric.git development environment
+        # DefaultOrg defines the organization which manufactures medication
         Name: ManufacturingMSP
 
         # ID to load the MSP definition as
         ID: ManufacturingMSP
 
         MSPDir: crypto-config/peerOrganizations/manufacturing.bigpharma.com/msp
+	
+	Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('ManufacturingMSP.admin', 'ManufacturingMSP.peer', 'ManufacturingMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('ManufacturingMSP.admin', 'ManufacturingMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('ManufacturingMSP.admin')"
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer0.manufacturing.bigpharma.com
+              Port: 7051
+
+    - &Shipping
+        # shipping defines the organization which is used to ship the medications
+        Name: ShippingMSP
+
+        # ID to load the MSP definition as
+        ID: ShippingMSP
+
+        MSPDir: crypto-config/peerOrganizations/shipping.shipstuff.com/msp
+
+  	Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('Shipping2MSP.admin', 'ShippingMSP.peer', 'ShippingMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('ShippingMSP.admin', 'ShippingMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('ShippingMSP.admin')"
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.shipping.shipstuff.com
               Port: 7051
 
 ################################################################################
@@ -113,19 +150,21 @@ Orderer: &OrdererDefaults
 ################################################################################
 Profiles:
 
-    OneOrgOrdererGenesis:
+    TwoOrgsOrdererGenesis:
         Orderer:
             <<: *OrdererDefaults
             Organizations:
                 - *OrdererOrg
         Consortiums:
-            SampleConsortium:
+            PharmacyConsortium:
                 Organizations:
                     - *Manufacturing
-    OneOrgChannel:
-        Consortium: SampleConsortium
+                    - *Shipping
+    TwoOrgsChannel:
+        Consortium: PharmacyConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *Manufacturing
+                - *Shipping
 

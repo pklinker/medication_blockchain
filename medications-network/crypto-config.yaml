@@ -26,6 +26,7 @@ PeerOrgs:
   # ---------------------------------------------------------------------------
   - Name: Manufacturing
     Domain: manufacturing.bigpharma.com
+    EnableNodeOUs: true
     # ---------------------------------------------------------------------------
     # "Specs"
     # ---------------------------------------------------------------------------
@@ -68,5 +69,12 @@ PeerOrgs:
     # ---------------------------------------------------------------------------
     # Count: The number of user accounts _in addition_ to Admin
     # ---------------------------------------------------------------------------
+    Users:
+      Count: 1
+  - Name: Shipping
+    Domain: shipping.shipstuff.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
     Users:
       Count: 1

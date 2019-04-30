@@ -1,5 +1,5 @@
 #
-# Copyright IBM Corp All Rights Reserved
+# Copyright ManTech All Rights Reserved
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -15,13 +15,29 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.bigpharma.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.manufacturing.bigpharma.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/496242c8a2bc8d6ee44fdc05eaa408d4f642d9698afd4ca78a3d8c663b22e4bb_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/c9a7a68624edbd923589945897a5d6792f5b0816eae5c5530b532a41c5703c4b_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
     volumes:
       - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.bigpharma.com
+    networks:
+      - basic
+
+  ca.shipstuff.com:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.shipstuff.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.shipping.shipstuff.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/55aff77cff4ad2bb34692bc052ba11c6d743f9f88dbb3308264ce9c4bd2a2def_sk
+    ports:
+      - "8054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw'
+    volumes:
+      - ./crypto-config/peerOrganizations/shipping.shipstuff.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.shipstuff.com
     networks:
       - basic
 
@@ -43,6 +59,7 @@ services:
         - ./config/:/etc/hyperledger/configtx
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/:/etc/hyperledger/msp/orderer
         - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/peers/peer0.manufacturing.bigpharma.com/:/etc/hyperledger/msp/peerManufacturing
+        - ./crypto-config/peerOrganizations/shipping.shipstuff.com/peers/peer0.shipping.shipstuff.com/:/etc/hyperledger/msp/peerShipping
     networks:
       - basic
 
@@ -57,6 +74,7 @@ services:
       - CORE_PEER_LOCALMSPID=ManufacturingMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_ADDRESS=peer0.manufacturing.bigpharma.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.manufacturing.bigpharma.com:7051
       # # the following setting starts chaincode containers on the same
       # # bridge network as the peers
       # # https://docs.docker.com/compose/networking/
@@ -85,10 +103,50 @@ services:
     networks:
       - basic
 
+  peer0.shipping.shipstuff.com:
+    container_name: peer0.shipping.shipstuff.com
+    image: hyperledger/fabric-peer
+    environment:
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer0.shipping.shipstuff.com
+      - FABRIC_LOGGING_SPEC=info
+      - CORE_CHAINCODE_LOGGING_LEVEL=info
+      - CORE_PEER_LOCALMSPID=ShippingMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
+      - CORE_PEER_ADDRESS=peer0.shipping.shipstuff.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.shipping.shipstuff.com:7051
+      # # the following setting starts chaincode containers on the same
+      # # bridge network as the peers
+      # # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb:5984
+      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+      # provide the credentials for ledger to connect to CouchDB.  The username and password must
+      # match the username and password set for the associated CouchDB.
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: peer node start
+    # command: peer node start --peer-chaincodedev=true
+    ports:
+      - 8051:7051
+      - 8053:7053
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config/peerOrganizations/shipping.shipstuff.com/peers/peer0.shipping.shipstuff.com/msp:/etc/hyperledger/msp/peer
+        - ./crypto-config/peerOrganizations/shipping.shipstuff.com/users:/etc/hyperledger/msp/users
+        - ./config:/etc/hyperledger/configtx
+    depends_on:
+      - orderer.example.com
+      - couchdb
+    networks:
+      - basic
+
   couchdb:
     container_name: couchdb
     image: hyperledger/fabric-couchdb
-    # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
+    # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user abigpharmand password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
     environment:
       - COUCHDB_USER=
@@ -98,15 +156,15 @@ services:
     networks:
       - basic
 
-  cli:
-    container_name: cli
+  cliBigPharma:
+    container_name: cliBigPharma
     image: hyperledger/fabric-tools
     tty: true
     environment:
       - GOPATH=/opt/gopath
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - FABRIC_LOGGING_SPEC=info
-      - CORE_PEER_ID=cli
+      - CORE_PEER_ID=cliBigPharma
       - CORE_PEER_ADDRESS=peer0.manufacturing.bigpharma.com:7051
       - CORE_PEER_LOCALMSPID=ManufacturingMSP
       - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp
@@ -118,8 +176,33 @@ services:
         - ./../chaincode/:/opt/gopath/src/github.com/
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     networks:
-        - basic
+      - basic
+      
     #depends_on:
     #  - orderer.example.com
     #  - peer0.manufacturing.bigpharma.com
     #  - couchdb
+    
+  #USE 7051 for the peer port for Docker Compose
+  cliShipping:
+    container_name: cliShipping
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=info
+      - CORE_PEER_ID=cliShipping
+      - CORE_PEER_ADDRESS=peer0.shipping.shipstuff.com:7051
+      - CORE_PEER_LOCALMSPID=ShippingMSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/shipping.shipstuff.com/users/Admin@shipping.shipstuff.com/msp
+      - CORE_CHAINCODE_KEEPALIVE=10
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com/
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+    networks:
+      - basic
+      

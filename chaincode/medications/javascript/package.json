@@ -1,6 +1,6 @@
 {
     "name": "medications",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Medication contract implemented in JavaScript",
     "main": "index.js",
     "engines": {
