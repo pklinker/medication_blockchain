@@ -1,4 +1,4 @@
-# Copyright IBM Corp. All Rights Reserved.
+# Copyright ManTech All Rights Reserved.
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -71,8 +71,22 @@ PeerOrgs:
     # ---------------------------------------------------------------------------
     Users:
       Count: 1
+  # ---------------------------------------------------------------------------
+  # Shipping
+  # ---------------------------------------------------------------------------
   - Name: Shipping
     Domain: shipping.shipstuff.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  # ---------------------------------------------------------------------------
+  # First pharmacy in the hospital network.
+  # ---------------------------------------------------------------------------
+  - Name: Hospital
+    Domain: hospital.health.org
     EnableNodeOUs: true
     Template:
       Count: 1

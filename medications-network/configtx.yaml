@@ -1,4 +1,4 @@
-# Copyright IBM Corp. All Rights Reserved.
+# Copyright ManTech, All Rights Reserved.
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -35,8 +35,7 @@ Organizations:
         ID: ManufacturingMSP
 
         MSPDir: crypto-config/peerOrganizations/manufacturing.bigpharma.com/msp
-	
-	Policies:
+        Policies:
             Readers:
                 Type: Signature
                 Rule: "OR('ManufacturingMSP.admin', 'ManufacturingMSP.peer', 'ManufacturingMSP.client')"
@@ -63,10 +62,10 @@ Organizations:
 
         MSPDir: crypto-config/peerOrganizations/shipping.shipstuff.com/msp
 
-  	Policies:
+        Policies:
             Readers:
                 Type: Signature
-                Rule: "OR('Shipping2MSP.admin', 'ShippingMSP.peer', 'ShippingMSP.client')"
+                Rule: "OR('ShippingMSP.admin', 'ShippingMSP.peer', 'ShippingMSP.client')"
             Writers:
                 Type: Signature
                 Rule: "OR('ShippingMSP.admin', 'ShippingMSP.client')"
@@ -80,6 +79,34 @@ Organizations:
             # encoded in the genesis block in the Application section context
             - Host: peer0.shipping.shipstuff.com
               Port: 7051
+ 
+    - &Hospital
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: HospitalMSP
+
+        # ID to load the MSP definition as
+        ID: HospitalMSP
+
+        MSPDir: crypto-config/peerOrganizations/hospital.health.org/msp
+        Policies:
+            Readers:
+                Type: Signature
+                Rule: "OR('HospitalMSP.admin', 'HospitalMSP.peer', 'HospitalMSP.client')"
+            Writers:
+                Type: Signature
+                Rule: "OR('HospitalMSP.admin', 'HospitalMSP.client')"
+            Admins:
+                Type: Signature
+                Rule: "OR('HospitalMSP.admin')"
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.hospital.health.org
+              Port: 7051
+
 
 ################################################################################
 #
@@ -95,6 +122,7 @@ Application: &ApplicationDefaults
     # the application side of the network
     Organizations:
 
+ 
 ################################################################################
 #
 #   SECTION: Orderer
@@ -160,6 +188,7 @@ Profiles:
                 Organizations:
                     - *Manufacturing
                     - *Shipping
+                    - *Hospital
     TwoOrgsChannel:
         Consortium: PharmacyConsortium
         Application:
@@ -167,4 +196,5 @@ Profiles:
             Organizations:
                 - *Manufacturing
                 - *Shipping
+                - *Hospital
 

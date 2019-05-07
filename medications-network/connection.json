@@ -1,6 +1,6 @@
 {
     "name": "medications-network",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "client": [ {
         "organization": "Manufacturing",
         "connection": {
@@ -22,6 +22,17 @@
                 "orderer": "300"
             }
         }
+    },
+    {
+        "organization": "Hospital",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                },
+                "orderer": "300"
+            }
+        }
     }],
     "channels": {
         "mychannel": {
@@ -30,7 +41,9 @@
             ],
             "peers": {
                 "peer0.manufacturing.bigpharma.com": {},
-                "peer0.shipping.shipstuff.com": {}
+                "peer0.shipping.shipstuff.com": {},
+                "peer0.hospital.health.org": {},
+                "peer1.hospital.health.org": {}
             }
         }
     },
@@ -51,8 +64,17 @@
         ],
         "certificateAuthorities": [
             "ca.shipstuff.com"
+        ]},
+        "Hospital": {
+        "mspid": "HospitalMSP",
+        "peers": [
+            "peer0.hospital.health.org",
+            "peer1.hospital.health.org"
+        ],
+        "certificateAuthorities": [
+            "ca.health.org"
         ]}
-      },
+    },
     "orderers": {
         "orderer.example.com": {
             "url": "grpc://localhost:7050"
@@ -64,6 +86,12 @@
         },
         "peer0.shipping.shipstuff.com": {
             "url": "grpc://localhost:8051"
+        },
+        "peer0.hospital.health.org": {
+            "url": "grpc://localhost:9051"
+        },
+        "peer1.hospital.health.org": {
+            "url": "grpc://localhost:9151"
         }
     },
     "certificateAuthorities": {
@@ -74,6 +102,10 @@
          "ca.shipstuff.com": {
             "url": "http://localhost:8054",
             "caName": "ca.shipstuff.com"
-        } 
+        },
+        "ca.health.org": {
+           "url": "http://localhost:9054",
+           "caName": "ca.health.org"
+       } 
     } 
 }
