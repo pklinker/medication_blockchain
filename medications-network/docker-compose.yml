@@ -15,7 +15,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.bigpharma.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.manufacturing.bigpharma.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/054c1bd00a7a4266dc243777104f3b1ffbb707a83a79d5f7428457b937aa66d8_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ecb6453f0a1769fe3593ae34f3ad66a46728e02944cfcd00f84dc4813f3d284e_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -31,7 +31,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.shipstuff.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.shipping.shipstuff.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/2d9fd909b243a633af357d5cafd87988fb32e62577d6e4fe2a77f42a9c678c4f_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ea9aff42dd639b7068691fcf54d44ac4587de28961ae69384f86e9838f4f9892_sk
     ports:
       - "8054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -47,7 +47,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.health.org
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hospital.health.org-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/9ce4678c903437cdfcad2c5435a07cf91ad4e70573669b1ed08ee2156f7c6d85_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/7fd7332776046aa702ba4be8942e97159d8025ea3b94fa94d21d9ab67a4bdb61_sk
     ports:
       - "9054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -202,47 +202,7 @@ services:
       - couchdb
     networks:
       - basic
-
-  peer1.hospital.health.org:
-    container_name: peer1.hospital.health.org
-    image: hyperledger/fabric-peer
-    environment:
-      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_PEER_ID=peer1.hospital.health.org
-      - FABRIC_LOGGING_SPEC=info
-      - CORE_CHAINCODE_LOGGING_LEVEL=info
-      - CORE_PEER_LOCALMSPID=HospitalMSP
-      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
-      - CORE_PEER_ADDRESS=peer1.hospital.health.org:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hospital.health.org:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hospital.health.org:7051
-      # # the following setting starts chaincode containers on the same
-      # # bridge network as the peers
-      # # https://docs.docker.com/compose/networking/
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
-      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb:5984
-      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
-      # provide the credentials for ledger to connect to CouchDB.  The username and password must
-      # match the username and password set for the associated CouchDB.
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    command: peer node start
-    # command: peer node start --peer-chaincodedev=true
-    ports:
-      - 10051:7051
-      - 10053:7053
-    volumes:
-        - /var/run/:/host/var/run/
-        - ./crypto-config/peerOrganizations/hospital.health.org/peers/peer1.hospital.health.org/msp:/etc/hyperledger/msp/peer
-        - ./crypto-config/peerOrganizations/hospital.health.org/users:/etc/hyperledger/msp/users
-        - ./config:/etc/hyperledger/configtx
-    depends_on:
-      - orderer.example.com
-      - couchdb
-    networks:
-      - basic
+      
   couchdb:
     container_name: couchdb
     image: hyperledger/fabric-couchdb
@@ -330,6 +290,5 @@ services:
         - ./crypto-config/peerOrganizations/shipping.shipstuff.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/shipping.shipstuff.com
     depends_on:
       - peer0.hospital.health.org
-      - peer1.hospital.health.org
     networks:
       - basic

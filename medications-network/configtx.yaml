@@ -36,15 +36,6 @@ Organizations:
 
         MSPDir: crypto-config/peerOrganizations/manufacturing.bigpharma.com/msp
         Policies:
-            Readers:
-                Type: Signature
-                Rule: "OR('ManufacturingMSP.admin', 'ManufacturingMSP.peer', 'ManufacturingMSP.client')"
-            Writers:
-                Type: Signature
-                Rule: "OR('ManufacturingMSP.admin', 'ManufacturingMSP.client')"
-            Admins:
-                Type: Signature
-                Rule: "OR('ManufacturingMSP.admin')"
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
@@ -63,15 +54,6 @@ Organizations:
         MSPDir: crypto-config/peerOrganizations/shipping.shipstuff.com/msp
 
         Policies:
-            Readers:
-                Type: Signature
-                Rule: "OR('ShippingMSP.admin', 'ShippingMSP.peer', 'ShippingMSP.client')"
-            Writers:
-                Type: Signature
-                Rule: "OR('ShippingMSP.admin', 'ShippingMSP.client')"
-            Admins:
-                Type: Signature
-                Rule: "OR('ShippingMSP.admin')"
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
@@ -90,15 +72,6 @@ Organizations:
 
         MSPDir: crypto-config/peerOrganizations/hospital.health.org/msp
         Policies:
-            Readers:
-                Type: Signature
-                Rule: "OR('HospitalMSP.admin', 'HospitalMSP.peer', 'HospitalMSP.client')"
-            Writers:
-                Type: Signature
-                Rule: "OR('HospitalMSP.admin', 'HospitalMSP.client')"
-            Admins:
-                Type: Signature
-                Rule: "OR('HospitalMSP.admin')"
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used

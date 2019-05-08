@@ -42,8 +42,7 @@
             "peers": {
                 "peer0.manufacturing.bigpharma.com": {},
                 "peer0.shipping.shipstuff.com": {},
-                "peer0.hospital.health.org": {},
-                "peer1.hospital.health.org": {}
+                "peer0.hospital.health.org": {}
             }
         }
     },
@@ -68,8 +67,7 @@
         "Hospital": {
         "mspid": "HospitalMSP",
         "peers": [
-            "peer0.hospital.health.org",
-            "peer1.hospital.health.org"
+            "peer0.hospital.health.org"
         ],
         "certificateAuthorities": [
             "ca.health.org"
@@ -89,9 +87,6 @@
         },
         "peer0.hospital.health.org": {
             "url": "grpc://localhost:9051"
-        },
-        "peer1.hospital.health.org": {
-            "url": "grpc://localhost:9151"
         }
     },
     "certificateAuthorities": {
