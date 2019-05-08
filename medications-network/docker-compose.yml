@@ -15,7 +15,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.bigpharma.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.manufacturing.bigpharma.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/476db964b96858280b87007977ea82c50b25de209ac1b4151f77c4843f141fbf_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/054c1bd00a7a4266dc243777104f3b1ffbb707a83a79d5f7428457b937aa66d8_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -31,7 +31,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.shipstuff.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.shipping.shipstuff.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/5747edeefd287da63edb1a22ef9607448dc0e6f4f3e05b361e195e9eef0290b6_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/2d9fd909b243a633af357d5cafd87988fb32e62577d6e4fe2a77f42a9c678c4f_sk
     ports:
       - "8054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -47,7 +47,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.health.org
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hospital.health.org-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ca5cd5b06ae616157f846da792a3acbb5c41f77cca55459e8c164e276e37e6ad_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/9ce4678c903437cdfcad2c5435a07cf91ad4e70573669b1ed08ee2156f7c6d85_sk
     ports:
       - "9054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -91,6 +91,7 @@ services:
       - CORE_PEER_LOCALMSPID=ManufacturingMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_ADDRESS=peer0.manufacturing.bigpharma.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.manufacturing.bigpharma.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.manufacturing.bigpharma.com:7051
       # # the following setting starts chaincode containers on the same
       # # bridge network as the peers
@@ -131,6 +132,7 @@ services:
       - CORE_PEER_LOCALMSPID=ShippingMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_ADDRESS=peer0.shipping.shipstuff.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.shipping.shipstuff.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.shipping.shipstuff.com:7051
       # # the following setting starts chaincode containers on the same
       # # bridge network as the peers
@@ -170,6 +172,7 @@ services:
       - CORE_CHAINCODE_LOGGING_LEVEL=info
       - CORE_PEER_LOCALMSPID=HospitalMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
+      - CORE_PEER_BOOTSTRAP=peer0.hospital.health.org:7051
       - CORE_PEER_ADDRESS=peer0.hospital.health.org:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hospital.health.org:7051
       # # the following setting starts chaincode containers on the same
@@ -211,7 +214,8 @@ services:
       - CORE_PEER_LOCALMSPID=HospitalMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_ADDRESS=peer1.hospital.health.org:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hospital.health.org:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hospital.health.org:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hospital.health.org:7051
       # # the following setting starts chaincode containers on the same
       # # bridge network as the peers
       # # https://docs.docker.com/compose/networking/
