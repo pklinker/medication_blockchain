@@ -11,7 +11,7 @@ client:
 channels:
     mychannel:
         orderers:
-        - orderer.example.com
+        - orderer.bigpharma.com
         peers:
             peer0.manufacturing.bigpharma.com: {}
 organizations:
@@ -35,7 +35,7 @@ organizations:
         - ca.health.org
 
 orderers:
-    orderer.example.com:
+    orderer.bigpharma.com:
         url: grpc://localhost:7050
 peers:
     peer0.manufacturing.bigpharma.com:

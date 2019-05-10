@@ -15,7 +15,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.bigpharma.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.manufacturing.bigpharma.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ecb6453f0a1769fe3593ae34f3ad66a46728e02944cfcd00f84dc4813f3d284e_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/77b78561d767af45c1addde428b32fbed0ffb6a991aa121d10039fd0d423b995_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -31,7 +31,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.shipstuff.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.shipping.shipstuff.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ea9aff42dd639b7068691fcf54d44ac4587de28961ae69384f86e9838f4f9892_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/3ff880bfd3ee99127588cd35fd99a489dae663b17fc711a7753ec3f057ce5a84_sk
     ports:
       - "8054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -47,7 +47,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.health.org
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hospital.health.org-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/7fd7332776046aa702ba4be8942e97159d8025ea3b94fa94d21d9ab67a4bdb61_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/aad03f4ff4e0587cce820e610b156f560be7f51137f3f6a58295ae8b659ccb28_sk
     ports:
       - "9054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -57,8 +57,8 @@ services:
     networks:
       - basic
 
-  orderer.example.com:
-    container_name: orderer.example.com
+  orderer.bigpharma.com:
+    container_name: orderer.bigpharma.com
     image: hyperledger/fabric-orderer
     environment:
       - FABRIC_LOGGING_SPEC=info
@@ -73,7 +73,7 @@ services:
       - 7050:7050
     volumes:
         - ./config/:/etc/hyperledger/configtx
-        - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/:/etc/hyperledger/msp/orderer
+        - ./crypto-config/ordererOrganizations/bigpharma.com/orderers/orderer.bigpharma.com/:/etc/hyperledger/msp/orderer
         - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/peers/peer0.manufacturing.bigpharma.com/:/etc/hyperledger/msp/peerManufacturing
         - ./crypto-config/peerOrganizations/shipping.shipstuff.com/peers/peer0.shipping.shipstuff.com/:/etc/hyperledger/msp/peerShipping
         - ./crypto-config/peerOrganizations/hospital.health.org/peers/peer0.hospital.health.org/:/etc/hyperledger/msp/peerHospital
@@ -116,7 +116,7 @@ services:
         - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
     depends_on:
-      - orderer.example.com
+      - orderer.bigpharma.com
       - couchdb
     networks:
       - basic
@@ -157,7 +157,7 @@ services:
         - ./crypto-config/peerOrganizations/shipping.shipstuff.com/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
     depends_on:
-      - orderer.example.com
+      - orderer.bigpharma.com
       - couchdb
     networks:
       - basic
@@ -198,7 +198,7 @@ services:
         - ./crypto-config/peerOrganizations/hospital.health.org/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
     depends_on:
-      - orderer.example.com
+      - orderer.bigpharma.com
       - couchdb
     networks:
       - basic
@@ -239,7 +239,7 @@ services:
       - basic
       
     #depends_on:
-    #  - orderer.example.com
+    #  - orderer.bigpharma.com
     #  - peer0.manufacturing.bigpharma.com
     #  - couchdb
     

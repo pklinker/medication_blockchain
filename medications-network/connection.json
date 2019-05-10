@@ -37,7 +37,7 @@
     "channels": {
         "mychannel": {
             "orderers": [
-                "orderer.example.com"
+                "orderer.bigpharma.com"
             ],
             "peers": {
                 "peer0.manufacturing.bigpharma.com": {},
@@ -74,7 +74,7 @@
         ]}
     },
     "orderers": {
-        "orderer.example.com": {
+        "orderer.bigpharma.com": {
             "url": "grpc://localhost:7050"
         }
     },
