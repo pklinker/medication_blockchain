@@ -340,3 +340,5 @@ ASALocalRun/
 /config
 .DS_Store
 .project
+
+**/medications-network/crypto-config

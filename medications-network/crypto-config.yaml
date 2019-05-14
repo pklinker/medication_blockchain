@@ -1,4 +1,4 @@
-# Copyright IBM Corp. All Rights Reserved.
+# Copyright ManTech All Rights Reserved.
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -11,7 +11,7 @@ OrdererOrgs:
   # Orderer
   # ---------------------------------------------------------------------------
   - Name: Orderer
-    Domain: example.com
+    Domain: bigpharma.com
     # ---------------------------------------------------------------------------
     # "Specs" - See PeerOrgs below for complete description
     # ---------------------------------------------------------------------------
@@ -22,10 +22,11 @@ OrdererOrgs:
 # ---------------------------------------------------------------------------
 PeerOrgs:
   # ---------------------------------------------------------------------------
-  # Org1
+  # Manufacturing
   # ---------------------------------------------------------------------------
-  - Name: Org1
-    Domain: org1.example.com
+  - Name: Manufacturing
+    Domain: manufacturing.bigpharma.com
+    EnableNodeOUs: true
     # ---------------------------------------------------------------------------
     # "Specs"
     # ---------------------------------------------------------------------------
@@ -43,8 +44,8 @@ PeerOrgs:
     #                 Org.Domain, respectively.
     # ---------------------------------------------------------------------------
     # Specs:
-    #   - Hostname: foo # implicitly "foo.org1.example.com"
-    #     CommonName: foo27.org5.example.com # overrides Hostname-based FQDN set above
+    #   - Hostname: foo # implicitly "foo.manufacturing.bigpharma.com"
+    #     CommonName: foo27.org5.bigpharma.com # overrides Hostname-based FQDN set above
     #   - Hostname: bar
     #   - Hostname: baz
     # ---------------------------------------------------------------------------
@@ -68,5 +69,26 @@ PeerOrgs:
     # ---------------------------------------------------------------------------
     # Count: The number of user accounts _in addition_ to Admin
     # ---------------------------------------------------------------------------
+    Users:
+      Count: 1
+  # ---------------------------------------------------------------------------
+  # Shipping
+  # ---------------------------------------------------------------------------
+  - Name: Shipping
+    Domain: shipping.shipstuff.com
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+    Users:  
+      Count: 1
+
+  # ---------------------------------------------------------------------------
+  # First pharmacy in the hospital network.
+  # ---------------------------------------------------------------------------
+  - Name: Hospital
+    Domain: hospital.health.org
+    EnableNodeOUs: true
+    Template:
+      Count: 1
     Users:
       Count: 1

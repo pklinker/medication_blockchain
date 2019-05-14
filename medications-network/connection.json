@@ -1,8 +1,8 @@
 {
-    "name": "basic-network",
-    "version": "1.0.0",
-    "client": {
-        "organization": "Org1",
+    "name": "medications-network",
+    "version": "1.0.2",
+    "client": [ {
+        "organization": "Manufacturing",
         "connection": {
             "timeout": {
                 "peer": {
@@ -12,41 +12,95 @@
             }
         }
     },
+    {
+        "organization": "Shipping",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                },
+                "orderer": "300"
+            }
+        }
+    },
+    {
+        "organization": "Hospital",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                },
+                "orderer": "300"
+            }
+        }
+    }],
     "channels": {
         "mychannel": {
             "orderers": [
-                "orderer.example.com"
+                "orderer.bigpharma.com"
             ],
             "peers": {
-                "peer0.org1.example.com": {}
+                "peer0.manufacturing.bigpharma.com": {},
+                "peer0.shipping.shipstuff.com": {},
+                "peer0.hospital.health.org": {}
             }
         }
     },
     "organizations": {
-        "Org1": {
-            "mspid": "Org1MSP",
+        "Manufacturing": {
+            "mspid": "ManufacturingMSP",
             "peers": [
-                "peer0.org1.example.com"
+                "peer0.manufacturing.bigpharma.com"
             ],
             "certificateAuthorities": [
-                "ca.example.com"
+                "ca.bigpharma.com"
             ]
-        }
+        },
+        "Shipping": {
+        "mspid": "ShippingMSP",
+        "peers": [
+            "peer0.shipping.shipstuff.com"
+        ],
+        "certificateAuthorities": [
+            "ca.shipstuff.com"
+        ]},
+        "Hospital": {
+        "mspid": "HospitalMSP",
+        "peers": [
+            "peer0.hospital.health.org"
+        ],
+        "certificateAuthorities": [
+            "ca.health.org"
+        ]}
     },
     "orderers": {
-        "orderer.example.com": {
+        "orderer.bigpharma.com": {
             "url": "grpc://localhost:7050"
         }
     },
     "peers": {
-        "peer0.org1.example.com": {
+        "peer0.manufacturing.bigpharma.com": {
             "url": "grpc://localhost:7051"
+        },
+        "peer0.shipping.shipstuff.com": {
+            "url": "grpc://localhost:8051"
+        },
+        "peer0.hospital.health.org": {
+            "url": "grpc://localhost:9051"
         }
     },
     "certificateAuthorities": {
-        "ca.example.com": {
+        "ca.bigpharma.com": {
             "url": "http://localhost:7054",
-            "caName": "ca.example.com"
-        }
-    }
+            "caName": "ca.bigpharma.com"
+        },
+         "ca.shipstuff.com": {
+            "url": "http://localhost:8054",
+            "caName": "ca.shipstuff.com"
+        },
+        "ca.health.org": {
+           "url": "http://localhost:9054",
+           "caName": "ca.health.org"
+       } 
+    } 
 }

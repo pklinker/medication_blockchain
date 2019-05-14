@@ -22,14 +22,22 @@ rm -rf ./hfc-key-store
 cd ../medications-network
 ./start.sh
 
-# Now launch the CLI container in order to install, instantiate chaincode
-# and prime the ledger with our 10 cars
-docker-compose -f ./docker-compose.yml up -d cli
+# Launch the CLI container in order to install the chaincode for Big Pharma
+docker-compose -f ./docker-compose.yml up -d cliBigPharma
+docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp" cliBigPharma peer chaincode install -n medications -v 1.0 -p "$CC_SRC_PATH" -l "$CC_RUNTIME_LANGUAGE"
 
-docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" cli peer chaincode install -n medications -v 1.0 -p "$CC_SRC_PATH" -l "$CC_RUNTIME_LANGUAGE"
-docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" cli peer chaincode instantiate -o orderer.example.com:7050 -C mychannel -n medications -l "$CC_RUNTIME_LANGUAGE" -v 1.0 -c '{"Args":[]}' -P "OR ('Org1MSP.member','Org2MSP.member')"
+# Launch the CLI container and install the chaincode for Shipping
+docker-compose -f ./docker-compose.yml up -d cliShipping
+docker exec -e "CORE_PEER_LOCALMSPID=ShippingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/shipping.shipstuff.com/users/Admin@shipping.shipstuff.com/msp" cliShipping peer chaincode install -n medications -v 1.0 -p "$CC_SRC_PATH" -l "$CC_RUNTIME_LANGUAGE"
+
+# Launch the CLI container and install the chaincode for pharmacy peer 0
+docker-compose -f ./docker-compose.yml up -d cliPharmacy
+docker exec -e "CORE_PEER_LOCALMSPID=HospitalMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hospital.health.org/users/Admin@hospital.health.org/msp" cliPharmacy peer chaincode install -n medications -v 1.0 -p "$CC_SRC_PATH" -l "$CC_RUNTIME_LANGUAGE"
+
+# Instantiate chaincode and prime the ledger with the medications for Big Pharma
+docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp" cliBigPharma peer chaincode instantiate -o orderer.bigpharma.com:7050 -C mychannel -n medications -l "$CC_RUNTIME_LANGUAGE" -v 1.0 -c '{"Args":[]}' -P "OR ('ManufacturingMSP.member','ShippingMSP.member','HospitalMSP.member')"
 sleep 10
-docker exec -e "CORE_PEER_LOCALMSPID=Org1MSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" cli peer chaincode invoke -o orderer.example.com:7050 -C mychannel -n medications -c '{"function":"initLedger","Args":[]}'
+docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp" cliBigPharma peer chaincode invoke -o orderer.bigpharma.com:7050 -C mychannel -n medications -c '{"function":"initLedger","Args":[]}'
 
 cat <<EOF
 

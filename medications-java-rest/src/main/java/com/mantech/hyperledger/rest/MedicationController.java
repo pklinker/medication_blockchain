@@ -8,6 +8,7 @@ import com.mantech.hyperledger.client.AppUser;
 import com.mantech.hyperledger.client.ChannelUtil;
 import com.mantech.hyperledger.client.JavaSDKFabCarExample;
 import org.apache.log4j.Logger;
+import org.codehaus.plexus.component.configurator.converters.composite.ObjectWithFieldsConverter;
 import org.hyperledger.fabric.sdk.BlockEvent;
 import org.hyperledger.fabric.sdk.ChaincodeID;
 import org.hyperledger.fabric.sdk.ChaincodeResponse;
@@ -126,10 +127,15 @@ private static final String SAMPLE_MEDICATION="{\"activeIngredient\":\"VERARD\",
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/transferMedicationLot")
-    public String distributeMedication(@RequestParam(value = "medNum", defaultValue = "MED-9") String medNum,
+    @RequestMapping(method = RequestMethod.POST, value = "/transferMedication")
+    public String transferMedication(@RequestParam(value = "medNum", defaultValue = "MED-9") String medNum,
                                        @RequestParam(value = "owner") String owner) {
+        log.info("Begin transferMedication");
         String result = "";
+        if ("-1".equals(medNum)) {
+            log.info("Got a test transferMedication call.");
+            return "Transferred " + medNum + " to " + owner;
+        }
         try {
             HFClient client = getHFClient();
             Channel channel = getChannel(client);

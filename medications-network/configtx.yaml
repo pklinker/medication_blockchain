@@ -1,4 +1,4 @@
-# Copyright IBM Corp. All Rights Reserved.
+# Copyright ManTech, All Rights Reserved.
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -25,24 +25,61 @@ Organizations:
         ID: OrdererMSP
 
         # MSPDir is the filesystem path which contains the MSP configuration
-        MSPDir: crypto-config/ordererOrganizations/example.com/msp
+        MSPDir: crypto-config/ordererOrganizations/bigpharma.com/msp
 
-    - &Org1
-        # DefaultOrg defines the organization which is used in the sampleconfig
-        # of the fabric.git development environment
-        Name: Org1MSP
+    - &Manufacturing
+        # DefaultOrg defines the organization which manufactures medication
+        Name: ManufacturingMSP
 
         # ID to load the MSP definition as
-        ID: Org1MSP
+        ID: ManufacturingMSP
 
-        MSPDir: crypto-config/peerOrganizations/org1.example.com/msp
+        MSPDir: crypto-config/peerOrganizations/manufacturing.bigpharma.com/msp
+        Policies:
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.org1.example.com
+            - Host: peer0.manufacturing.bigpharma.com
               Port: 7051
+
+    - &Shipping
+        # shipping defines the organization which is used to ship the medications
+        Name: ShippingMSP
+
+        # ID to load the MSP definition as
+        ID: ShippingMSP
+
+        MSPDir: crypto-config/peerOrganizations/shipping.shipstuff.com/msp
+
+        Policies:
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.shipping.shipstuff.com
+              Port: 7051
+ 
+    - &Hospital
+        # DefaultOrg defines the organization which is used in the sampleconfig
+        # of the fabric.git development environment
+        Name: HospitalMSP
+
+        # ID to load the MSP definition as
+        ID: HospitalMSP
+
+        MSPDir: crypto-config/peerOrganizations/hospital.health.org/msp
+        Policies:
+
+        AnchorPeers:
+            # AnchorPeers defines the location of peers which can be used
+            # for cross org gossip communication.  Note, this value is only
+            # encoded in the genesis block in the Application section context
+            - Host: peer0.hospital.health.org
+              Port: 7051
+
 
 ################################################################################
 #
@@ -58,6 +95,7 @@ Application: &ApplicationDefaults
     # the application side of the network
     Organizations:
 
+ 
 ################################################################################
 #
 #   SECTION: Orderer
@@ -73,7 +111,7 @@ Orderer: &OrdererDefaults
     OrdererType: solo
 
     Addresses:
-        - orderer.example.com:7050
+        - orderer.bigpharma.com:7050
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
@@ -113,19 +151,23 @@ Orderer: &OrdererDefaults
 ################################################################################
 Profiles:
 
-    OneOrgOrdererGenesis:
+    TwoOrgsOrdererGenesis:
         Orderer:
             <<: *OrdererDefaults
             Organizations:
                 - *OrdererOrg
         Consortiums:
-            SampleConsortium:
+            PharmacyConsortium:
                 Organizations:
-                    - *Org1
-    OneOrgChannel:
-        Consortium: SampleConsortium
+                    - *Manufacturing
+                    - *Shipping
+                    - *Hospital
+    TwoOrgsChannel:
+        Consortium: PharmacyConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
+                - *Manufacturing
+                - *Shipping
+                - *Hospital
 
