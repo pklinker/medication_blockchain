@@ -45,7 +45,8 @@ import java.util.Properties;
 public class JavaSDKFabCarExample {
 
     private static final Logger log = Logger.getLogger(JavaSDKFabCarExample.class);
-    private static final String HOSTNAME = "172.20.180.34";
+//    private static final String HOSTNAME = "172.20.180.34";
+    private static final String HOSTNAME = "34.237.138.100";
     private static final String URL_ROOT = "http://"+HOSTNAME;
     private static final String GRCP_ROOT = "grpc://"+HOSTNAME;
 

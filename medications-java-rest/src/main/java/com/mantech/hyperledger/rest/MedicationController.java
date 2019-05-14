@@ -32,7 +32,8 @@ import java.util.stream.Collectors;
 
 public class MedicationController {
     private static final Logger log = Logger.getLogger(JavaSDKFabCarExample.class);
-    private static final String HOSTNAME = "172.20.180.33";
+//    private static final String HOSTNAME = "172.20.180.33";
+    private static final String HOSTNAME = "3.213.135.183";
     private static final String URL_ROOT = "http://" + HOSTNAME;
     private static final String GRCP_ROOT = "grpc://" + HOSTNAME;
     private static final String template = "Hello, %s!";
@@ -240,7 +241,7 @@ private static final String SAMPLE_MEDICATION="{\"activeIngredient\":\"VERARD\",
         Channel channel = ChannelUtil.getChannel(client,
                 "peer0.manufacturing.bigpharma.com",
                 GRCP_ROOT + ":7051",
-                "orderer.example.com",
+                "orderer.bigpharma.com",
                 GRCP_ROOT + ":7050",
                 "mychannel",
                 "peer0",
