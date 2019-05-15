@@ -35,9 +35,9 @@ docker-compose -f ./docker-compose.yml up -d cliPharmacy
 docker exec -e "CORE_PEER_LOCALMSPID=HospitalMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hospital.health.org/users/Admin@hospital.health.org/msp" cliPharmacy peer chaincode install -n medications -v 1.0 -p "$CC_SRC_PATH" -l "$CC_RUNTIME_LANGUAGE"
 
 # Instantiate chaincode and prime the ledger with the medications for Big Pharma
-docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp" cliBigPharma peer chaincode instantiate -o orderer.bigpharma.com:7050 -C mychannel -n medications -l "$CC_RUNTIME_LANGUAGE" -v 1.0 -c '{"Args":[]}' -P "OR ('ManufacturingMSP.member','ShippingMSP.member','HospitalMSP.member')"
+docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp" cliBigPharma peer chaincode instantiate -o orderer.bigpharma.com:7050 -C distribution -n medications -l "$CC_RUNTIME_LANGUAGE" -v 1.0 -c '{"Args":[]}' -P "OR ('ManufacturingMSP.member','ShippingMSP.member','HospitalMSP.member')"
 sleep 10
-docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp" cliBigPharma peer chaincode invoke -o orderer.bigpharma.com:7050 -C mychannel -n medications -c '{"function":"initLedger","Args":[]}'
+docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp" cliBigPharma peer chaincode invoke -o orderer.bigpharma.com:7050 -C distribution -n medications -c '{"function":"initLedger","Args":[]}'
 
 cat <<EOF
 

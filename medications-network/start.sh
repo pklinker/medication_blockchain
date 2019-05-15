@@ -19,17 +19,17 @@ export FABRIC_START_TIMEOUT=20
 sleep ${FABRIC_START_TIMEOUT}
 
 # Create the channel for the manufacturing organization
-docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@manufacturing.bigpharma.com/msp" peer0.manufacturing.bigpharma.com peer channel create -o orderer.bigpharma.com:7050 -c mychannel -f /etc/hyperledger/configtx/channel.tx
+docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@manufacturing.bigpharma.com/msp" peer0.manufacturing.bigpharma.com peer channel create -o orderer.bigpharma.com:7050 -c distribution -f /etc/hyperledger/configtx/channel.tx
 # Join peer0.manufacturing.bigpharma.com to the channel.
-docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@manufacturing.bigpharma.com/msp" peer0.manufacturing.bigpharma.com peer channel join -b mychannel.block
+docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@manufacturing.bigpharma.com/msp" peer0.manufacturing.bigpharma.com peer channel join -b distribution.block
 
 # fetch the channel for the shipping organization
-docker exec -e "CORE_PEER_LOCALMSPID=ShippingMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@shipping.shipstuff.com/msp" peer0.shipping.shipstuff.com peer channel fetch newest mychannel.block -o orderer.bigpharma.com:7050 -c mychannel 
+docker exec -e "CORE_PEER_LOCALMSPID=ShippingMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@shipping.shipstuff.com/msp" peer0.shipping.shipstuff.com peer channel fetch newest distribution.block -o orderer.bigpharma.com:7050 -c distribution 
 # Join peer0.shipping.shipstuff.com to the channel.
-docker exec -e "CORE_PEER_LOCALMSPID=ShippingMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@shipping.shipstuff.com/msp" peer0.shipping.shipstuff.com peer channel join -b mychannel.block
+docker exec -e "CORE_PEER_LOCALMSPID=ShippingMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@shipping.shipstuff.com/msp" peer0.shipping.shipstuff.com peer channel join -b distribution.block
 
 # fetch the channel for the pharmacy peer0 organization
-docker exec -e "CORE_PEER_LOCALMSPID=HospitalMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@hospital.health.org/msp" peer0.hospital.health.org peer channel fetch newest mychannel.block -o orderer.bigpharma.com:7050 -c mychannel 
+docker exec -e "CORE_PEER_LOCALMSPID=HospitalMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@hospital.health.org/msp" peer0.hospital.health.org peer channel fetch newest distribution.block -o orderer.bigpharma.com:7050 -c distribution 
 # Join peer0.pharma1.health.org to the channel.
-docker exec -e "CORE_PEER_LOCALMSPID=HospitalMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@hospital.health.org/msp" peer0.hospital.health.org peer channel join -b mychannel.block
+docker exec -e "CORE_PEER_LOCALMSPID=HospitalMSP" -e "CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@hospital.health.org/msp" peer0.hospital.health.org peer channel join -b distribution.block
 

@@ -35,7 +35,7 @@
         }
     }],
     "channels": {
-        "mychannel": {
+        "distribution": {
             "orderers": [
                 "orderer.bigpharma.com"
             ],

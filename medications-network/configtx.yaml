@@ -60,7 +60,7 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer0.shipping.shipstuff.com
-              Port: 7051
+              Port: 8051
  
     - &Hospital
         # DefaultOrg defines the organization which is used in the sampleconfig
@@ -78,7 +78,7 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer0.hospital.health.org
-              Port: 7051
+              Port: 9051
 
 
 ################################################################################
