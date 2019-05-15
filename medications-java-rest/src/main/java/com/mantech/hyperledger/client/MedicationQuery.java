@@ -10,7 +10,8 @@ import java.util.Collection;
 
 public class MedicationQuery {
     private static final Logger log = Logger.getLogger(JavaSDKFabCarExample.class);
-    private static final String HOSTNAME = "172.20.180.34";
+//    private static final String HOSTNAME = "172.20.180.34";
+    private static final String HOSTNAME = "3.213.135.183";
     private static final String URL_ROOT = "http://"+HOSTNAME;
     private static final String GRCP_ROOT = "grpc://"+HOSTNAME;
 
@@ -35,7 +36,7 @@ public class MedicationQuery {
         Channel channel = ChannelUtil.getChannel(client,
                 "peer0.manufacturing.bigpharma.com",
                 GRCP_ROOT+":7051",
-                "orderer.example.com",
+                "orderer.bigpharma.com",
                 GRCP_ROOT+":7050",
                 "mychannel",
                 "eventhub01",
