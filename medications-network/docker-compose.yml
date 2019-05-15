@@ -75,8 +75,10 @@ services:
         - ./config/:/etc/hyperledger/configtx
         - ./crypto-config/ordererOrganizations/bigpharma.com/orderers/orderer.bigpharma.com/:/etc/hyperledger/msp/orderer
         - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/peers/peer0.manufacturing.bigpharma.com/:/etc/hyperledger/msp/peerManufacturing
+        - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/peers/peer1.manufacturing.bigpharma.com/:/etc/hyperledger/msp/peerManufacturing
         - ./crypto-config/peerOrganizations/shipping.shipstuff.com/peers/peer0.shipping.shipstuff.com/:/etc/hyperledger/msp/peerShipping
         - ./crypto-config/peerOrganizations/hospital.health.org/peers/peer0.hospital.health.org/:/etc/hyperledger/msp/peerHospital
+        - ./crypto-config/peerOrganizations/hospital.health.org/peers/peer1.hospital.health.org/:/etc/hyperledger/msp/peerHospital
     networks:
       - basic
 
@@ -92,7 +94,6 @@ services:
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
       - CORE_PEER_ADDRESS=peer0.manufacturing.bigpharma.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.manufacturing.bigpharma.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.manufacturing.bigpharma.com:7051
       # # the following setting starts chaincode containers on the same
       # # bridge network as the peers
@@ -122,6 +123,48 @@ services:
     networks:
       - basic
 
+  peer1.manufacturing.bigpharma.com:
+    container_name: peer1.manufacturing.bigpharma.com
+    image: hyperledger/fabric-peer
+    environment:
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer1.manufacturing.bigpharma.com
+      - FABRIC_LOGGING_SPEC=info
+      - CORE_CHAINCODE_LOGGING_LEVEL=info
+      - CORE_PEER_LOCALMSPID=ManufacturingMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7151
+      - CORE_PEER_ADDRESS=peer1.manufacturing.bigpharma.com:7151
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.manufacturing.bigpharma.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.manufacturing.bigpharma.com:7151
+      # # the following setting starts chaincode containers on the same
+      # # bridge network as the peers
+      # # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb:5984
+      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+      # provide the credentials for ledger to connect to CouchDB.  The username and password must
+      # match the username and password set for the associated CouchDB.
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: peer node start
+    # command: peer node start --peer-chaincodedev=true
+    ports:
+      - 7151:7151
+      - 7153:7053
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/peers/peer1.manufacturing.bigpharma.com/msp:/etc/hyperledger/msp/peer
+        - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/users:/etc/hyperledger/msp/users
+        - ./config:/etc/hyperledger/configtx
+    depends_on:
+      - orderer.bigpharma.com
+      - couchdb
+    networks:
+      - basic
+
   peer0.shipping.shipstuff.com:
     container_name: peer0.shipping.shipstuff.com
     image: hyperledger/fabric-peer
@@ -134,7 +177,6 @@ services:
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_LISTENADDRESS=0.0.0.0:8051
       - CORE_PEER_ADDRESS=peer0.shipping.shipstuff.com:8051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.shipping.shipstuff.com:8051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.shipping.shipstuff.com:8051
       # # the following setting starts chaincode containers on the same
       # # bridge network as the peers
@@ -174,7 +216,6 @@ services:
       - CORE_CHAINCODE_LOGGING_LEVEL=info
       - CORE_PEER_LOCALMSPID=HospitalMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
-      - CORE_PEER_BOOTSTRAP=peer0.hospital.health.org:9051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
       - CORE_PEER_ADDRESS=peer0.hospital.health.org:9051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hospital.health.org:9051
@@ -198,6 +239,48 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ./crypto-config/peerOrganizations/hospital.health.org/peers/peer0.hospital.health.org/msp:/etc/hyperledger/msp/peer
+        - ./crypto-config/peerOrganizations/hospital.health.org/users:/etc/hyperledger/msp/users
+        - ./config:/etc/hyperledger/configtx
+    depends_on:
+      - orderer.bigpharma.com
+      - couchdb
+    networks:
+      - basic
+      
+  peer1.hospital.health.org:
+    container_name: peer1.hospital.health.org
+    image: hyperledger/fabric-peer
+    environment:
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_PEER_ID=peer1.hospital.health.org
+      - FABRIC_LOGGING_SPEC=info
+      - CORE_CHAINCODE_LOGGING_LEVEL=info
+      - CORE_PEER_LOCALMSPID=HospitalMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
+      - CORE_PEER_ADDRESS=peer1.hospital.health.org:9151
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:9151
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.hospital.health.org:9051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hospital.health.org:9151
+      # # the following setting starts chaincode containers on the same
+      # # bridge network as the peers
+      # # https://docs.docker.com/compose/networking/
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb:5984
+      # The CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME and CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD
+      # provide the credentials for ledger to connect to CouchDB.  The username and password must
+      # match the username and password set for the associated CouchDB.
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: peer node start
+    # command: peer node start --peer-chaincodedev=true
+    ports:
+      - 9151:9151
+      - 9153:7053
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config/peerOrganizations/hospital.health.org/peers/peer1.hospital.health.org/msp:/etc/hyperledger/msp/peer
         - ./crypto-config/peerOrganizations/hospital.health.org/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
     depends_on:

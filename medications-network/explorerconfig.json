@@ -1,0 +1,146 @@
+{
+  "network-configs": {
+    "medications-network": {
+      "version": "1.0.4",
+      "clients": {
+        "client-1": {
+          "tlsEnable": false,
+          "organization": "ManufacturingMSP",
+          "channel": "distribution",
+          "credentialStore": {
+            "path": "./tmp/credentialStore_Manufacturing/credential",
+            "cryptoStore": {
+              "path": "./tmp/credentialStore_Manufacturing/crypto"
+            }
+          }
+        }
+      },
+      "channels": {
+        "distribution": {
+          "peers": {
+              "peer0.manufacturing.bigpharma.com": {},
+              "peer1.manufacturing.bigpharma.com": {},
+	      "peer0.shipping.shipstuff.com":{},
+      	      "peer0.hospital.health.org":{},
+       	      "peer1.hospital.health.org":{}
+          },
+          "connection": {
+            "timeout": {
+              "peer": {
+                "endorser": "6000",
+                "eventHub": "6000",
+                "eventReg": "6000"
+              }
+            }
+          }
+        }
+      },
+      "organizations": {
+        "ManufacturingMSP": {
+          "mspid": "ManufacturingMSP",
+          "fullpath": false,
+          "adminPrivateKey": {
+            "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp/keystore"
+          },
+          "signedCert": {
+              "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp/signcerts"
+          },
+          "certificateAuthorities": ["ca.bigpharma.com"],
+          "peers": ["peer0.manufacturing.bigpharma.com","peer0.manufacturing.bigpharma.com"]
+
+        },
+        "ShippingMSP": {
+          "mspid": "ShippingMSP",
+          "fullpath": false,
+          "adminPrivateKey": {
+            "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/shipping.shipstuff.com/users/Admin@shipping.shipstuff.com/msp/keystore"
+          },
+          "signedCert": {
+              "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/shipping.shipstuff.com/users/Admin@shipping.shipstuff.com/msp/signcerts"
+          },
+          "certificateAuthorities": ["ca.shipstuff.com"],
+          "peers": ["peer0.shipping.shipstuff.com"]
+        },
+        "HospitalMSP": {
+          "mspid": "HospitalMSP",
+          "fullpath": false,
+          "adminPrivateKey": {
+            "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/hospital.health.org/users/Admin@hospital.health.org/msp/keystore"
+          },
+          "signedCert": {
+              "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/hospital.health.org/users/Admin@hospital.health.org/msp/signcerts"
+          },
+          "certificateAuthorities": ["ca.health.org"],
+            "peers": ["peer0.hospital.health.org","peer1.hospital.health.org"]
+        },
+        "OrdererMSP": {
+          "mspid": "OrdererMSP",
+          "adminPrivateKey": {
+            "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/ordererOrganizations/bigpharma.com/users/Admin@bigpharma.com/msp/keystore"
+          }
+        }
+      },
+      "peers": {
+        "peer0.manufacturing.bigpharma.com": {
+          "tlsCACerts": {
+            "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/manufacturing.bigpharma.com/peers/peer0.manufacturing.bigpharma.com/tls/ca.crt"
+          },
+          "url": "grpc://localhost:7051",
+          "eventUrl": "grpc://localhost:7053",
+          "grpcOptions": {
+            "ssl-target-name-override": "peer0.manufacturing.bigpharma.com"
+          }
+        },
+        "peer1.manufacturing.bigpharma.com": {
+          "tlsCACerts": {
+            "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/manufacturing.bigpharma.com/peers/peer1.manufacturing.bigpharma.com/tls/ca.crt"
+          },
+          "url": "grpc://localhost:7151",
+          "eventUrl": "grpc://localhost:7153",
+          "grpcOptions": {
+            "ssl-target-name-override": "peer1.manufacturing.bigpharma.com"
+          }
+        },
+        "peer0.shipping.shipstuff.com": {
+          "tlsCACerts": {
+            "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/shipping.shipstuff.com/peers/peer0.shipping.shipstuff.com/tls/ca.crt"
+          },
+          "url": "grpc://localhost:8051",
+          "eventUrl": "grpc://localhost:8053",
+          "grpcOptions": {
+            "ssl-target-name-override": "peer0.shipping.shipstuff.com"
+          }
+        },
+        "peer0.hospital.health.org": {
+          "tlsCACerts": {
+            "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/hospital.health.org/peers/peer0.hospital.health.org/tls/ca.crt"
+          },
+          "url": "grpc://localhost:9051",
+          "eventUrl": "grpc://localhost:9053",
+          "grpcOptions": {
+            "ssl-target-name-override": "peer0.hospital.health.org"
+          }
+        },
+        "peer1.hospital.health.org": {
+          "tlsCACerts": {
+            "path": "/home/pklinker/fabric/medication_blockchain/medications-network/crypto-config/peerOrganizations/hospital.health.org/peers/peer1.hospital.health.org/tls/ca.crt"
+          },
+          "url": "grpc://localhost:9151",
+          "eventUrl": "grpc://localhost:9153",
+          "grpcOptions": {
+            "ssl-target-name-override": "peer1.hospital.health.org"
+          }
+        }
+      },
+      "orderers": {
+        "orderer.bigpharma.com": {
+          "url": "grpc://localhost:7050"
+        }
+      }
+    },
+    "network-2": {}
+  },
+  "configtxgenToolPath": "/home/pklinker/fabric/fabric-samples/bin",
+  "license": "Apache-2.0"
+}
+
