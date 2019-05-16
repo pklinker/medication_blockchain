@@ -6,6 +6,6 @@
 #
 # Exit on first error, print all commands.
 set -ev
-
+export IMAGE_TAG="latest"
 # Shut down the Docker containers that might be currently running.
 docker-compose -f docker-compose.yml stop

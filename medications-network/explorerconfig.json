@@ -20,9 +20,9 @@
           "peers": {
               "peer0.manufacturing.bigpharma.com": {},
               "peer1.manufacturing.bigpharma.com": {},
-	      "peer0.shipping.shipstuff.com":{},
-      	      "peer0.hospital.health.org":{},
-       	      "peer1.hospital.health.org":{}
+       "peer0.shipping.shipstuff.com":{},
+             "peer0.hospital.health.org":{},
+              "peer1.hospital.health.org":{}
           },
           "connection": {
             "timeout": {

@@ -7,7 +7,7 @@ set -ev
 
 # don't rewrite paths for Windows Git Bash users
 export MSYS_NO_PATHCONV=1
-
+export IMAGE_TAG="latest"
 docker-compose -f docker-compose.yml down
 
 docker-compose -f docker-compose.yml up -d ca.bigpharma.com ca.shipstuff.com ca.health.org orderer.bigpharma.com peer0.manufacturing.bigpharma.com peer1.manufacturing.bigpharma.com peer0.shipping.shipstuff.com peer0.hospital.health.org peer1.hospital.health.org couchdb
