@@ -53,7 +53,7 @@ public class MedicationController {
         try {
             // create fabric-ca client
 
-            HFClient client = getHFClient();
+            HFClient client = getHFClient(orgName);
             Channel channel = getChannel(orgName, client);
 
             // call query blockchain example
@@ -110,7 +110,7 @@ public class MedicationController {
         if ("TESTMED".equalsIgnoreCase(medNum))
             return SAMPLE_MEDICATION;
         try {
-            HFClient client = getHFClient();
+            HFClient client = getHFClient(orgName);
             Channel channel = getChannel(orgName, client);
             ArrayList<String> args = new ArrayList<>();
             args.add(medNum);
@@ -147,7 +147,7 @@ public class MedicationController {
             return "Transferred " + medNum + " to " + owner;
         }
         try {
-            HFClient client = getHFClient();
+            HFClient client = getHFClient(orgName);
             Channel channel = getChannel(orgName, client);
             TransactionProposalRequest tpr = client.newTransactionProposalRequest();
             ChaincodeID cid = ChaincodeID.newBuilder().setName("medications").build();
@@ -180,7 +180,7 @@ public class MedicationController {
             @RequestParam(value = "quantity") String quantity) {
         String result = "Unknown";
         try {
-            HFClient client = getHFClient();
+            HFClient client = getHFClient(orgName);
             Channel channel = getChannel(orgName, client);
 
             TransactionProposalRequest tpr = client.newTransactionProposalRequest();
@@ -205,30 +205,34 @@ public class MedicationController {
 
     }
 
-    private HFClient getHFClient() throws Exception {
+    private HFClient getHFClient(String org) throws Exception {
         if (urlRoot == null)
             urlRoot = "http://" + networkAddress;
         if (grcpRoot == null)
             grcpRoot = "grpc://" + networkAddress;
 
-        HFCAClient caClient = ChannelUtil.getHfCaClient(urlRoot + ":7054", null);
+        HFCAClient caClient = getHfCaClient(org);
+        String mspId =  "ManufacturingMSP";
+
+        if (SHIPPING.equalsIgnoreCase(org)) {
+            mspId = "ShippingMSP";
+        }
+        else if (HOSPITAL.equalsIgnoreCase(org)) {
+            mspId = "HospitalMSP";
+        }
 
         // enroll or load admin
-        AppUser admin = ChannelUtil.getAdmin(caClient);
+        AppUser admin = ChannelUtil.getAdmin(caClient, org, mspId);
         log.info(admin);
 
         // register and enroll new user
-        AppUser appUser = ChannelUtil.getUser(caClient, admin, "sales1");
+        AppUser appUser = ChannelUtil.getUser(caClient, admin, "java1", org, mspId);
         log.info(appUser);
 
         // get HFC client instance
         HFClient client = ChannelUtil.getHfClient();
         // set user context
         client.setUserContext(admin);
-        // get HFC channel using the client, even though the variable isn't used,  this function must be called to
-        // initialize it for the HFClient.
-
-
         return client;
     }
 
@@ -248,6 +252,20 @@ public class MedicationController {
         return null;
     }
 
+    public HFCAClient getHfCaClient(String orgName) throws Exception {
+        log.info("the channel" + channelName);
+
+        if (MANUFACTURING.equalsIgnoreCase(orgName)) {
+            return ChannelUtil.getHfCaClient(urlRoot + ":7054", null);
+        }
+        else if (SHIPPING.equalsIgnoreCase(orgName)) {
+            return ChannelUtil.getHfCaClient(urlRoot + ":8054", null);
+        }
+        else if (HOSPITAL.equalsIgnoreCase(orgName)) {
+            return ChannelUtil.getHfCaClient(urlRoot + ":9054", null);
+        }
+        return null;
+    }
     private Channel getManufacturingChannel(HFClient client) throws Exception {
         Channel channel = ChannelUtil.getChannel(client,
                 "peer0.manufacturing.bigpharma.com",

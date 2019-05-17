@@ -20,11 +20,11 @@ public class MedicationQuery {
         HFCAClient caClient = ChannelUtil.getHfCaClient(URL_ROOT+":7054", null);
 
         // enroll or load admin
-        AppUser admin = ChannelUtil.getAdmin(caClient);
+        AppUser admin = ChannelUtil.getAdmin(caClient, "manufacturing", "ManufacturingMSP");
         log.info(admin);
 
         // register and enroll new user
-        AppUser appUser = ChannelUtil.getUser(caClient, admin, "sales1");
+        AppUser appUser = ChannelUtil.getUser(caClient, admin, "sales1","manufacturing", "ManufacturingMSP");
         log.info(appUser);
 
         // get HFC client instance

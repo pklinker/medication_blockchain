@@ -12,7 +12,7 @@ import java.util.Set;
  * Basic implementation of the {@link User} interface.
  */
 public class AppUser implements User, Serializable {
-    private static final long serializationId = 1L;
+    private static final long serializationId = 12361233L;
 
     private String name;
     private Set<String> roles;
