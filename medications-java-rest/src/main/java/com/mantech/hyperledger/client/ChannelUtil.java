@@ -80,7 +80,11 @@ public class ChannelUtil {
         Channel channel = client.newChannel(channelName);
         channel.addPeer(client.newPeer(peerName, peerUrl));
 //        channel.addEventHub(client.newEventHub(eventHubName, eventHubUrl));
-        channel.addOrderer(client.newOrderer(ordererName, ordererUrl));
+        Properties properties = new Properties();
+        properties.setProperty("ordererWaitTimeMilliSecs", Long.toString(60000L));
+        Orderer orderer = client.newOrderer(ordererName,ordererUrl,properties);
+
+        channel.addOrderer(orderer);
         channel.initialize();
         return channel;
     }
