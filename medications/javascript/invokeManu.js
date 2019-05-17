@@ -3,7 +3,7 @@
  */
 
 'use strict';
-// bring FileSystemWallet and Gateway in scope from the fabric-network module.
+
 const { FileSystemWallet, Gateway } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
@@ -16,7 +16,7 @@ async function main() {
     try {
 
         // Create a new file system based wallet for managing identities.
-        const walletPath = path.join(process.cwd(), 'shippingwallet');
+        const walletPath = path.join(process.cwd(), 'wallet');
         const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
@@ -30,7 +30,7 @@ async function main() {
 
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
-        await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: true } });
+        await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false } });
 
         // Get the network (channel) our contract is deployed to.
         const network = await gateway.getNetwork('distribution');
@@ -38,15 +38,17 @@ async function main() {
         // Get the contract from the network.
         const contract = network.getContract('medications');
 
-        // Evaluate the specified transaction.
-        // queryCar transaction - requires 1 argument, ex: ('queryMedication', 'MED4')
-        // queryAllMedications transaction - requires no arguments, ex: ('queryAllMedications')
-        const result = await contract.evaluateTransaction('queryAllMedications');
-        //const result = await contract.evaluateTransaction('queryMedication', 'MED12');
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
+        // Submit the specified transaction.
+        //await contract.submitTransaction('prescribeMedication', 'MED100', );
+        // await contract.submitTransaction('dispenseMedication', 'MED-9', 'Kylo Ren','100');
+        await contract.submitTransaction('transferMedicationLot', 'MED-9', 'Shipstuff');
+        console.log('Transaction has been submitted');
+
+        // Disconnect from the gateway.
+        await gateway.disconnect();
 
     } catch (error) {
-        console.error(`Failed to evaluate transaction: ${error}`);
+        console.error(`Failed to submit transaction: ${error}`);
         process.exit(1);
     }
 }

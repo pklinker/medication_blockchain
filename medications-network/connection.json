@@ -35,14 +35,16 @@
         }
     }],
     "channels": {
-        "mychannel": {
+        "distribution": {
             "orderers": [
                 "orderer.bigpharma.com"
             ],
             "peers": {
                 "peer0.manufacturing.bigpharma.com": {},
+                "peer1.manufacturing.bigpharma.com": {},
                 "peer0.shipping.shipstuff.com": {},
-                "peer0.hospital.health.org": {}
+                "peer0.hospital.health.org": {},
+                "peer1.hospital.health.org": {}
             }
         }
     },
@@ -50,7 +52,8 @@
         "Manufacturing": {
             "mspid": "ManufacturingMSP",
             "peers": [
-                "peer0.manufacturing.bigpharma.com"
+                "peer0.manufacturing.bigpharma.com",
+                "peer1.manufacturing.bigpharma.com"
             ],
             "certificateAuthorities": [
                 "ca.bigpharma.com"
@@ -67,7 +70,8 @@
         "Hospital": {
         "mspid": "HospitalMSP",
         "peers": [
-            "peer0.hospital.health.org"
+            "peer0.hospital.health.org",
+            "peer1.hospital.health.org"
         ],
         "certificateAuthorities": [
             "ca.health.org"
@@ -82,11 +86,17 @@
         "peer0.manufacturing.bigpharma.com": {
             "url": "grpc://localhost:7051"
         },
+        "peer1.manufacturing.bigpharma.com": {
+            "url": "grpc://localhost:7151"
+        },
         "peer0.shipping.shipstuff.com": {
             "url": "grpc://localhost:8051"
         },
         "peer0.hospital.health.org": {
             "url": "grpc://localhost:9051"
+        },
+        "peer1.hospital.health.org": {
+            "url": "grpc://localhost:9151"
         }
     },
     "certificateAuthorities": {

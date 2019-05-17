@@ -61,7 +61,7 @@ PeerOrgs:
     # name collisions
     # ---------------------------------------------------------------------------
     Template:
-      Count: 1
+      Count: 2
       # Start: 5
       # Hostname: {{.Prefix}}{{.Index}} # default
     # ---------------------------------------------------------------------------
@@ -70,7 +70,7 @@ PeerOrgs:
     # Count: The number of user accounts _in addition_ to Admin
     # ---------------------------------------------------------------------------
     Users:
-      Count: 1
+      Count: 3
   # ---------------------------------------------------------------------------
   # Shipping
   # ---------------------------------------------------------------------------
@@ -80,7 +80,7 @@ PeerOrgs:
     Template:
       Count: 1
     Users:  
-      Count: 1
+      Count: 3
 
   # ---------------------------------------------------------------------------
   # First pharmacy in the hospital network.
@@ -89,6 +89,6 @@ PeerOrgs:
     Domain: hospital.health.org
     EnableNodeOUs: true
     Template:
-      Count: 1
+      Count: 3
     Users:
-      Count: 1
+      Count: 3

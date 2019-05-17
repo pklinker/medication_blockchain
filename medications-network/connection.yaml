@@ -9,7 +9,7 @@ client:
                 endorser: '300'
             orderer: '300'
 channels:
-    mychannel:
+    distribution:
         orderers:
         - orderer.bigpharma.com
         peers:
@@ -19,6 +19,7 @@ organizations:
         mspid: ManufacturingMSP
         peers:
         - peer0.manufacturing.bigpharma.com
+        - peer1.manufacturing.bigpharma.com
         certificateAuthorities:
         - ca.bigpharma.com
     Shipping:
@@ -31,6 +32,7 @@ organizations:
         mspid: HospitalMSP
         peers:
         -peer0.hospital.health.org
+        -peer1.hospital.health.org
         certificateAuthorities:
         - ca.health.org
 
@@ -40,10 +42,14 @@ orderers:
 peers:
     peer0.manufacturing.bigpharma.com:
         url: grpc://localhost:7051
+    peer1.manufacturing.bigpharma.com:
+        url: grpc://localhost:7151
     peer0.shipping.shipstuff.com:
         url: grpc://localhost:8051
     peer0.hospital.health.org:
         url: grpc://localhost:9051
+    peer1.hospital.health.org:
+        url: grpc://localhost:9151
 certificateAuthorities:
     ca.bigpharma.com:
         url: http://localhost:7054
