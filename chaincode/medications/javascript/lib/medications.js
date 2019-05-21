@@ -136,7 +136,7 @@ class Medication extends Contract {
           drugName: 'LIQUAEMIN SODIUM PRESERVATIVE FREE',
           activeIngredient: 'HEPARIN SODIUM',
           referenceStandard: '0',
-         quantity:1000, 
+         quantity:10000, 
          recipient:'', 
          owner: 'BigPharma'
         },
@@ -150,7 +150,7 @@ class Medication extends Contract {
           drugName: 'HISTAMINE PHOSPHATE',
           activeIngredient: 'HISTAMINE PHOSPHATE',
           referenceStandard: '0',
-         quantity:1000, 
+         quantity:10000, 
          recipient:'', 
          owner: 'BigPharma'
         },
@@ -164,7 +164,7 @@ class Medication extends Contract {
           drugName: 'HISTAMINE PHOSPHATE',
           activeIngredient: 'HISTAMINE PHOSPHATE',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -178,7 +178,7 @@ class Medication extends Contract {
           drugName: 'HISTAMINE PHOSPHATE',
           activeIngredient: 'HISTAMINE PHOSPHATE',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -192,7 +192,7 @@ class Medication extends Contract {
           drugName: 'BUTISOL SODIUM',
           activeIngredient: 'BUTABARBITAL SODIUM',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -206,7 +206,7 @@ class Medication extends Contract {
           drugName: 'DOCA',
           activeIngredient: 'DESOXYCORTICOSTERONE ACETATE',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -220,7 +220,7 @@ class Medication extends Contract {
           drugName: 'VERARD',
           activeIngredient: 'VERARD',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -234,7 +234,7 @@ class Medication extends Contract {
           drugName: 'GUANIDINE HYDROCHLORIDE',
           activeIngredient: 'GUANIDINE HYDROCHLORIDE',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -247,8 +247,10 @@ class Medication extends Contract {
           referenceDrug: '0',
           drugName: 'MENADIONE',
           activeIngredient: 'MENADIONE',
-          referenceStandard: '0'
-          , quantity:1000, recipient:'', owner: 'BigPharma'
+          referenceStandard: '0',
+          quantity:100000, 
+          recipient:'', 
+          owner: 'BigPharma'
         },
         {
           lotNo:19,
@@ -260,7 +262,7 @@ class Medication extends Contract {
           drugName: 'PROLOID',
           activeIngredient: 'THYROGLOBULIN',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'',
           owner: 'BigPharma'
         },
@@ -274,7 +276,7 @@ class Medication extends Contract {
           drugName: 'INULIN AND SODIUM CHLORIDE',
           activeIngredient: 'INULIN',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -288,7 +290,7 @@ class Medication extends Contract {
           drugName: 'AMINOPHYLLIN',
           activeIngredient: 'AMINOPHYLLINE',
           referenceStandard: '0', 
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -302,7 +304,7 @@ class Medication extends Contract {
           drugName: 'AMINOPHYLLIN',
           activeIngredient: 'AMINOPHYLLINE',
           referenceStandard: '0', 
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -316,7 +318,7 @@ class Medication extends Contract {
           drugName: 'BENSULFOID',
           activeIngredient: 'SULFUR',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -330,7 +332,7 @@ class Medication extends Contract {
           drugName: 'ORETON METHYL',
           activeIngredient: 'METHYLTESTOSTERONE',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -344,7 +346,7 @@ class Medication extends Contract {
           drugName: 'ORETON METHYL',
           activeIngredient: 'METHYLTESTOSTERONE',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -359,7 +361,7 @@ class Medication extends Contract {
           drugName: 'METANDREN',
           activeIngredient: 'METHYLTESTOSTERONE',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -373,7 +375,7 @@ class Medication extends Contract {
           drugName: 'METANDREN',
           activeIngredient: 'METHYLTESTOSTERONE',
           referenceStandard: '0',
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -387,7 +389,7 @@ class Medication extends Contract {
           drugName: 'PITRESSIN TANNATE',
           activeIngredient: 'VASOPRESSIN TANNATE',
           referenceStandard: '0', 
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -401,7 +403,7 @@ class Medication extends Contract {
           drugName: 'DRISDOL',
           activeIngredient: 'ERGOCALCIFEROL',
           referenceStandard: '1', 
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -415,7 +417,7 @@ class Medication extends Contract {
           drugName: 'SYNKAYVITE',
           activeIngredient: 'MENADIOL SODIUM DIPHOSPHATE',
           referenceStandard: '0', 
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -429,7 +431,7 @@ class Medication extends Contract {
           drugName: 'SYNKAYVITE',
           activeIngredient: 'MENADIOL SODIUM DIPHOSPHATE',
           referenceStandard: '0', 
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -444,7 +446,7 @@ class Medication extends Contract {
           drugName: 'SYNKAYVITE',
           activeIngredient: 'MENADIOL SODIUM DIPHOSPHATE',
           referenceStandard: '0', 
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -458,7 +460,7 @@ class Medication extends Contract {
           drugName: 'THEELIN',
           activeIngredient: 'ESTRONE',
           referenceStandard: '0', 
-          quantity:1000, 
+          quantity:10000, 
           recipient:'', 
           owner: 'BigPharma'
         },
@@ -587,6 +589,11 @@ class Medication extends Contract {
       throw new Error(`${medNumber} does not exist`);
     }
     const medication = JSON.parse(medAsBytes.toString());
+
+    if ((medication.quantity-quantity) <= 0)
+    {
+      throw new Error(`${medNumber} has insufficient quantity to dispense.`);
+    }
     medication.quantity = medication.quantity - quantity;
 
     await ctx.stub.putState(medNumber, Buffer.from(JSON.stringify(medication)));

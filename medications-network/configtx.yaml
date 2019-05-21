@@ -25,7 +25,8 @@ Organizations:
         ID: OrdererMSP
 
         # MSPDir is the filesystem path which contains the MSP configuration
-        MSPDir: crypto-config/ordererOrganizations/bigpharma.com/msp
+        MSPDir: crypto-config/ordererOrganizations/bigpharma.com/msp        
+
 
     - &Manufacturing
         # DefaultOrg defines the organization which manufactures medication
@@ -35,7 +36,6 @@ Organizations:
         ID: ManufacturingMSP
 
         MSPDir: crypto-config/peerOrganizations/manufacturing.bigpharma.com/msp
-        Policies:
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
@@ -53,8 +53,6 @@ Organizations:
 
         MSPDir: crypto-config/peerOrganizations/shipping.shipstuff.com/msp
 
-        Policies:
-
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
@@ -71,7 +69,6 @@ Organizations:
         ID: HospitalMSP
 
         MSPDir: crypto-config/peerOrganizations/hospital.health.org/msp
-        Policies:
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
@@ -79,7 +76,6 @@ Organizations:
             # encoded in the genesis block in the Application section context
             - Host: peer0.hospital.health.org
               Port: 9051
-
 
 ################################################################################
 #
@@ -95,7 +91,7 @@ Application: &ApplicationDefaults
     # the application side of the network
     Organizations:
 
- 
+
 ################################################################################
 #
 #   SECTION: Orderer
@@ -131,15 +127,14 @@ Orderer: &OrdererDefaults
         # max bytes will result in a batch larger than preferred max bytes.
         PreferredMaxBytes: 512 KB
 
+    Organizations:
+
     Kafka:
         # Brokers: A list of Kafka brokers to which the orderer connects
         # NOTE: Use IP:port notation
         Brokers:
             - 127.0.0.1:9092
 
-    # Organizations is the list of orgs which are defined as participants on
-    # the orderer side of the network
-    Organizations:
 
 ################################################################################
 #
@@ -170,4 +165,3 @@ Profiles:
                 - *Manufacturing
                 - *Shipping
                 - *Hospital
-

@@ -3,7 +3,7 @@
  */
 
 'use strict';
-
+const minimist = require('minimist');
 const FabricCAServices = require('fabric-ca-client');
 const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network');
 const fs = require('fs');
@@ -14,17 +14,34 @@ const ccpJSON = fs.readFileSync(ccpPath, 'utf8');
 const ccp = JSON.parse(ccpJSON);
 
 async function main() {
+
+    let args = minimist(process.argv.slice(2), {  
+        default: {
+          c:'ca.bipharma.com',
+          m:'ManufacturingMSP',
+          n:'user1',
+          w:'wallet'
+        },
+        alias: {
+            c: 'CA',
+            m: 'msp',
+            n: 'name',
+            w: 'wallet'
+
+        }
+    });
+
     try {
 
         // Create a new file system based wallet for managing identities.
-        const walletPath = path.join(process.cwd(), 'wallet');
+        const walletPath = path.join(process.cwd(), args.w);
         const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
-        const userExists = await wallet.exists('user1');
+        const userExists = await wallet.exists(args.n);
         if (userExists) {
-            console.log('An identity for the user "user1" already exists in the wallet');
+            console.log('An identity for the user ' + args.n+ ' already exists in the wallet');
             return;
         }
 
@@ -42,20 +59,20 @@ async function main() {
 
         // Get the CA client object from the gateway for interacting with the CA.
         //const ca = gateway.getClient().getCertificateAuthority();
-        const caURL = ccp.certificateAuthorities['ca.bigpharma.com'].url;
+        const caURL = ccp.certificateAuthorities[args.c].url;
         const ca = new FabricCAServices(caURL);
         const adminIdentity = gateway.getCurrentIdentity();
 
         // Register the user, enroll the user, and import the new identity into the wallet.
-        // const secret = await ca.register({ affiliation: 'manufacturing.department1', enrollmentID: 'user1', role: 'client' }, adminIdentity);
-        const secret = await ca.register({ affiliation: '', enrollmentID: 'user1', role: 'client' }, adminIdentity);
-        const enrollment = await ca.enroll({ enrollmentID: 'user1', enrollmentSecret: secret });
-        const userIdentity = X509WalletMixin.createIdentity('ManufacturingMSP', enrollment.certificate, enrollment.key.toBytes());
-        wallet.import('user1', userIdentity);
-        console.log('Successfully registered and enrolled admin user "user1" and imported it into the wallet');
+        // const secret = await ca.register({ affiliation: 'manufacturing.department1', enrollmentID: 'user', role: 'client' }, adminIdentity);
+        const secret = await ca.register({ affiliation: '', enrollmentID: args.n, role: 'client' }, adminIdentity);
+        const enrollment = await ca.enroll({ enrollmentID: args.n, enrollmentSecret: secret });
+        const userIdentity = X509WalletMixin.createIdentity(args.m, enrollment.certificate, enrollment.key.toBytes());
+        wallet.import(args.n, userIdentity);
+        console.log('Successfully registered and enrolled admin user "' + args.n + '" and imported it into the wallet');
 
     } catch (error) {
-        console.error(`Failed to register user "user1": ${error}`);
+        console.error(`Failed to register user "' + args.n + '": ${error}`);
         process.exit(1);
     }
 }

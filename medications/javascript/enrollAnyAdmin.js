@@ -18,20 +18,27 @@ const ccp = JSON.parse(ccpJSON);
 async function main() {
 
     let args = minimist(process.argv.slice(2), {  
+        default: {
+          c:'ca.bipharma.com'  
+        },
         alias: {
+            c: 'CA',
             h: 'help',
-            v: 'version'
+            n: 'name',
+            v: 'version',
+            w: 'wallet'
+
         }
     });
 
     try {
-
+        //console.log('args: ',args);
         // Create a new CA client for interacting with the CA.
-        const caURL = ccp.certificateAuthorities['ca.bigpharma.com'].url;
+        const caURL = ccp.certificateAuthorities[args.c].url;
         const ca = new FabricCAServices(caURL);
 
         // Create a new file system based wallet for managing identities.
-        const walletPath = path.join(process.cwd(), 'wallet');
+        const walletPath = path.join(process.cwd(), args.w);
         const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 

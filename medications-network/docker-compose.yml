@@ -23,7 +23,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.bigpharma.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.manufacturing.bigpharma.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/4b679052437035779b920469a6eb20754b78793071bc084a1b34dc5bbf76ba00_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/b12abe42a90c9dcc5eb82579472b90e337e3d3c76eabf27b0ef05e40752b843c_sk
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -39,7 +39,7 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.shipstuff.com
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.shipping.shipstuff.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/e3db743e5bffb561976dce0c03597806898d65560a0198c9b155fd20c23d94dd_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/11f8bd4e5f3f741c7c6af9b289ef410ee19dccf1ca146970d18ffe8f218cdad5_sk
     ports:
       - "8054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
@@ -55,12 +55,12 @@ services:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.health.org
       - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hospital.health.org-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/799109dd81a6666c5026718d9747f53c49e2c7a069bc0d816b62ff85e3159d98_sk
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/854187244f474906422a0bad7bffb636f5219c7dc0efac9b3e0a8b8e2b075734_sk
     ports:
       - "9054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw'
     volumes:
-      - ./crypto-config/peerOrganizations/health.org/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ./crypto-config/peerOrganizations/hospital.health.org/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca.health.org
     networks:
       - basic
@@ -85,7 +85,6 @@ services:
       - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
       - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
-
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
     command: orderer
     ports:
@@ -137,6 +136,7 @@ services:
       - 7053:7053
     volumes:
         - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com
         - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/peers/peer0.manufacturing.bigpharma.com/msp:/etc/hyperledger/msp/peer
         - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
@@ -182,6 +182,7 @@ services:
       - 7153:7053
     volumes:
         - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com
         - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/peers/peer1.manufacturing.bigpharma.com/msp:/etc/hyperledger/msp/peer
         - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
@@ -226,6 +227,7 @@ services:
       - 8053:7053
     volumes:
         - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com
         - ./crypto-config/peerOrganizations/shipping.shipstuff.com/peers/peer0.shipping.shipstuff.com/msp:/etc/hyperledger/msp/peer
         - ./crypto-config/peerOrganizations/shipping.shipstuff.com/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
@@ -235,6 +237,7 @@ services:
       - couchdb
     networks:
       - basic
+
 
   peer0.hospital.health.org:
     container_name: peer0.hospital.health.org
@@ -271,6 +274,7 @@ services:
       - 9053:7053
     volumes:
         - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com
         - ./crypto-config/peerOrganizations/hospital.health.org/peers/peer0.hospital.health.org/msp:/etc/hyperledger/msp/peer
         - ./crypto-config/peerOrganizations/hospital.health.org/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
@@ -316,6 +320,7 @@ services:
       - 9153:7053
     volumes:
         - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com
         - ./crypto-config/peerOrganizations/hospital.health.org/peers/peer1.hospital.health.org/msp:/etc/hyperledger/msp/peer
         - ./crypto-config/peerOrganizations/hospital.health.org/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
@@ -358,6 +363,32 @@ services:
         - /var/run/:/host/var/run/
         - ./../chaincode/:/opt/gopath/src/github.com/
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./crypto-config/peerOrganizations/shipping.shipstuff.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/shipping.shipstuff.com
+        - ./crypto-config/peerOrganizations/hospital.health.org:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hospital.health.org
+    networks:
+      - basic
+      
+  cliBigPharma1:
+    container_name: cliBigPharma1
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=info
+      - CORE_PEER_ID=cliBigPharma1
+      - CORE_PEER_ADDRESS=peer1.manufacturing.bigpharma.com:7151
+      - CORE_PEER_LOCALMSPID=ManufacturingMSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp
+      - CORE_CHAINCODE_KEEPALIVE=10
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com/
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./crypto-config/peerOrganizations/shipping.shipstuff.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/shipping.shipstuff.com
+        - ./crypto-config/peerOrganizations/hospital.health.org:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hospital.health.org
     networks:
       - basic
       
@@ -386,10 +417,11 @@ services:
         - /var/run/:/host/var/run/
         - ./../chaincode/:/opt/gopath/src/github.com/
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com
+        - ./crypto-config/peerOrganizations/hospital.health.org:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hospital.health.org
     networks:
       - basic
       
-  #USE 7051 for the peer port for Docker Compose
   cliPharmacy:
     container_name: cliPharmacy
     image: hyperledger/fabric-tools
@@ -413,5 +445,31 @@ services:
         - ./crypto-config/peerOrganizations/shipping.shipstuff.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/shipping.shipstuff.com
     depends_on:
       - peer0.hospital.health.org
+    networks:
+      - basic
+
+  cliPharmacy1:
+    container_name: cliPharmacy1
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=info
+      - CORE_PEER_ID=cliPharmacy1
+      - CORE_PEER_ADDRESS=peer1.hospital.health.org:9151
+      - CORE_PEER_LOCALMSPID=HospitalMSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hospital.health.org/users/Admin@hospital.health.org/msp
+      - CORE_CHAINCODE_KEEPALIVE=10
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com/
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./crypto-config/peerOrganizations/manufacturing.bigpharma.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com
+        - ./crypto-config/peerOrganizations/shipping.shipstuff.com:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/shipping.shipstuff.com
+    depends_on:
+      - peer1.hospital.health.org
     networks:
       - basic

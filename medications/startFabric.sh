@@ -13,8 +13,8 @@ starttime=$(date +%s)
 CC_SRC_LANGUAGE=${1:-"javascript"}
 CC_SRC_LANGUAGE=`echo "$CC_SRC_LANGUAGE" | tr [:upper:] [:lower:]`
 CC_RUNTIME_LANGUAGE=node # chaincode runtime language is node.js
+#CC_SRC_PATH=/opt/gopath/src/github.com/medications/javascript
 CC_SRC_PATH=/opt/gopath/src/github.com/medications/javascript
-
 # clean the keystore
 rm -rf ./hfc-key-store
 
@@ -26,6 +26,10 @@ cd ../medications-network
 docker-compose -f ./docker-compose.yml up -d cliBigPharma
 docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp" cliBigPharma peer chaincode install -n medications -v 1.0.2 -p "$CC_SRC_PATH" -l "$CC_RUNTIME_LANGUAGE"
 
+# Launch the CLI container in order to install the chaincode for Big Pharma peer 1
+docker-compose -f ./docker-compose.yml up -d cliBigPharma1
+docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp" cliBigPharma1 peer chaincode install -n medications -v 1.0.2 -p "$CC_SRC_PATH" -l "$CC_RUNTIME_LANGUAGE"
+
 # Launch the CLI container and install the chaincode for Shipping
 docker-compose -f ./docker-compose.yml up -d cliShipping
 docker exec -e "CORE_PEER_LOCALMSPID=ShippingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/shipping.shipstuff.com/users/Admin@shipping.shipstuff.com/msp" cliShipping peer chaincode install -n medications -v 1.0.2 -p "$CC_SRC_PATH" -l "$CC_RUNTIME_LANGUAGE"
@@ -33,6 +37,10 @@ docker exec -e "CORE_PEER_LOCALMSPID=ShippingMSP" -e "CORE_PEER_MSPCONFIGPATH=/o
 # Launch the CLI container and install the chaincode for pharmacy peer 0
 docker-compose -f ./docker-compose.yml up -d cliPharmacy
 docker exec -e "CORE_PEER_LOCALMSPID=HospitalMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hospital.health.org/users/Admin@hospital.health.org/msp" cliPharmacy peer chaincode install -n medications -v 1.0.2 -p "$CC_SRC_PATH" -l "$CC_RUNTIME_LANGUAGE"
+
+# Launch the CLI container and install the chaincode for pharmacy peer 1
+docker-compose -f ./docker-compose.yml up -d cliPharmacy1
+docker exec -e "CORE_PEER_LOCALMSPID=HospitalMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/hospital.health.org/users/Admin@hospital.health.org/msp" cliPharmacy1 peer chaincode install -n medications -v 1.0.2 -p "$CC_SRC_PATH" -l "$CC_RUNTIME_LANGUAGE"
 
 # Instantiate chaincode and prime the ledger with the medications for Big Pharma
 docker exec -e "CORE_PEER_LOCALMSPID=ManufacturingMSP" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/manufacturing.bigpharma.com/users/Admin@manufacturing.bigpharma.com/msp" cliBigPharma peer chaincode instantiate -o orderer.bigpharma.com:7050 -C distribution -n medications -l "$CC_RUNTIME_LANGUAGE" -v 1.0.2 -c '{"Args":[]}' -P "OR ('ManufacturingMSP.member','ShippingMSP.member','HospitalMSP.member')"
