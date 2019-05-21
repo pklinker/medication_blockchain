@@ -80,7 +80,11 @@ public class ChannelUtil {
         Channel channel = client.newChannel(channelName);
         channel.addPeer(client.newPeer(peerName, peerUrl));
 //        channel.addEventHub(client.newEventHub(eventHubName, eventHubUrl));
-        channel.addOrderer(client.newOrderer(ordererName, ordererUrl));
+        Properties properties = new Properties();
+        properties.setProperty("ordererWaitTimeMilliSecs", Long.toString(60000L));
+        Orderer orderer = client.newOrderer(ordererName,ordererUrl,properties);
+
+        channel.addOrderer(orderer);
         channel.initialize();
         return channel;
     }
@@ -113,14 +117,14 @@ public class ChannelUtil {
      * @return AppUser instance with userId, affiliation,mspId and enrollment set.
      * @throws Exception
      */
-    public static AppUser getUser(HFCAClient caClient, AppUser registrar, String userId) throws Exception {
-        AppUser appUser = tryDeserialize(userId);
+    public static AppUser getUser(HFCAClient caClient, AppUser registrar, String userId, String org, String mspId) throws Exception {
+        AppUser appUser = tryDeserialize(org, userId);
         if (appUser == null) {
             RegistrationRequest rr = new RegistrationRequest(userId, "");
             String enrollmentSecret = caClient.register(rr, registrar);
             Enrollment enrollment = caClient.enroll(userId, enrollmentSecret);
-            appUser = new AppUser(userId, "", "ManufacturingMSP", enrollment);
-            serialize(appUser);
+            appUser = new AppUser(userId, "", mspId, enrollment);
+            serialize(org, appUser);
         }
         return appUser;
     }
@@ -134,12 +138,13 @@ public class ChannelUtil {
      * @return AppUser instance with userid, affiliation, mspId and enrollment set
      * @throws Exception
      */
-    public  static AppUser getAdmin(HFCAClient caClient) throws Exception {
-        AppUser admin = tryDeserialize("admin");
+    public  static AppUser getAdmin(HFCAClient caClient, String org, String mspId) throws Exception {
+
+        AppUser admin = tryDeserialize(org,"admin");
         if (admin == null) {
             Enrollment adminEnrollment = caClient.enroll("admin", "adminpw");
-            admin = new AppUser("admin", "", "ManufacturingMSP", adminEnrollment);
-            serialize(admin);
+            admin = new AppUser("admin", "", mspId, adminEnrollment);
+            serialize(org,admin);
         }
         return admin;
     }
@@ -166,12 +171,14 @@ public class ChannelUtil {
     /**
      * Serialize AppUser object to file
      *
+     * @param org The blockchain network organization
      * @param appUser The object to be serialized
      * @throws IOException
      */
-    public static void serialize(AppUser appUser) throws IOException {
+    public static void serialize(String org, AppUser appUser) throws IOException {
+        String fname = makeFileName(org,appUser.getName());
         try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(
-                Paths.get(appUser.getName() + ".jso")))) {
+                Paths.get(fname)))) {
             oos.writeObject(appUser);
         }
     }
@@ -179,21 +186,29 @@ public class ChannelUtil {
     /**
      * Deserialize AppUser object from file
      *
+     * @param org The blockchain network organization
      * @param name The name of the user. Used to build file name ${name}.jso
      * @return
      * @throws Exception
      */
-    public static AppUser tryDeserialize(String name) throws Exception {
-        if (Files.exists(Paths.get(name + ".jso"))) {
-            return deserialize(name);
+    public static AppUser tryDeserialize(String org, String name) throws Exception {
+        String fname = makeFileName(org,name);
+        if (Files.exists(Paths.get(fname))) {
+            return deserialize(fname);
         }
         return null;
     }
 
-    public static AppUser deserialize(String name) throws Exception {
+    public static AppUser deserialize(String fname) throws Exception {
         try (ObjectInputStream decoder = new ObjectInputStream(
-                Files.newInputStream(Paths.get(name + ".jso")))) {
+                Files.newInputStream(Paths.get(fname)))) {
             return (AppUser) decoder.readObject();
         }
+    }
+
+    private static String makeFileName(String org, String name){
+        StringBuilder sb = new StringBuilder(org);
+        sb.append("_").append(name).append(".jso");
+        return sb.toString();
     }
 }
