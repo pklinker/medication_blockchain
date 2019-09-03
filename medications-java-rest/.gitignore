@@ -1,4 +1,9 @@
 *.jso
 target
 *.iml
+
+.classpath
+.factorypath
 .idea
+.settings/*
+.vscode/*
