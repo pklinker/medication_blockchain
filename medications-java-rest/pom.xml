@@ -8,9 +8,10 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <openapi-generator-version>3.3.4</openapi-generator-version>
-        <org.springframework.version>5.1.6.RELEASE</org.springframework.version>
-        <jackson-version>2.9.8</jackson-version>
+        <org.springframework.version>5.1.9.RELEASE</org.springframework.version>
+        <jackson-version>2.9.9.3</jackson-version>
         <jaxb.version>2.4.0-b180830.0359</jaxb.version>
+        <springboot.version>2.1.7.RELEASE</springboot.version>
     </properties>
     <build>
         <plugins>
@@ -59,6 +60,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
                 <configuration>
                     <fork>true</fork>
                     <mainClass>${start-class}</mainClass>
@@ -130,19 +132,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.1.1.RELEASE</version>
-        </dependency>
-            <dependency>
-        <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.1.1.RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>5.1.9.RELEASE</version>
-            <scope>test</scope>
+            <version>${springboot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -163,6 +153,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${springboot.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
