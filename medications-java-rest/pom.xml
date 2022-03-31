@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <openapi-generator-version>3.3.4</openapi-generator-version>
+        <openapi-generator-version>5.1.0</openapi-generator-version>
         <org.springframework.version>5.3.18</org.springframework.version>
         <jackson-version>2.9.9.3</jackson-version>
         <jaxb.version>2.4.0-b180830.0359</jaxb.version>
